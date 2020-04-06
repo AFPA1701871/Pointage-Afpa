@@ -57,4 +57,5 @@ else
 {
     //Sinon afficher la page par defaut
     AfficherPage($routes["default"]);
+ //Utilisation pour le test manager AfficherPage(["php/model/", "test.manager", "Deconnexion"]);
 }

@@ -1,19 +1,11 @@
 <?php
-function ChargerClasse($classe)
-{
-    if (file_exists("../Model/" . $classe . ".Class.php"))
-    {
-        require "../Model/" . $classe . ".Class.php";
-    }
-    else
-    {
-        require "../Controller/" . $classe . ".Class.php";
-    }
+for ($i=1;$i<10;$i++)
+$p[] = PointageManager::findById(20+$i);
 
-}
-spl_autoload_register("ChargerClasse");
-
-DbConnect::init();
+$p[2]->setIdPresence('3');
+$p[4]->setIdPointage(null);
+var_dump($p);
+PointageManager::majPointage(1,1,$p);
 
 //--------------------------JourneeManager---------------------------//
 

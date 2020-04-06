@@ -40,12 +40,13 @@ class JourneeManager
             return false;
         }
     }
+    
 
-    public static function getList()
+    public static function getListBySemaine($idSemaine)
     {
         $db = DbConnect::getDb();
         $caisse = [];
-        $q = $db->prepare("SELECT * FROM journee");
+        $q = $db->prepare("SELECT * FROM journee where idSemaine=".$idSemaine);
         $q->execute();
         while ($donnees = $q->fetch(PDO::FETCH_ASSOC)) {
             if ($donnees != false) {

@@ -15,8 +15,8 @@ CREATE TABLE IF NOT EXISTS stagiaire (
         prenom      Varchar (50) NOT NULL ,
         motDePasse  Varchar (50) NOT NULL ,
         numBenef    Varchar (50) NOT NULL,
-        idOffre 	Int NOT NULL,
-        role 		Int NOT NULL
+        idOffre     Int NOT NULL,
+        role        Int NOT NULL
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 #------------------------------------------------------------
@@ -29,7 +29,7 @@ CREATE TABLE IF NOT EXISTS formateur (
         nom         Varchar (50) NOT NULL ,
         prenom      Varchar (50) NOT NULL ,
         motDePasse  Varchar (50) NOT NULL ,
-        role 		Int NOT NULL
+        role        Int NOT NULL
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 #------------------------------------------------------------
@@ -93,8 +93,8 @@ CREATE TABLE IF NOT EXISTS pointage (
         idStagiaire Int NOT NULL ,
         idJournee   Int NOT NULL ,
         idPresence  Int NOT NULL ,
-        commentaire Varchar (50) NOT NULL ,
-        validation  Varchar (50) NOT NULL
+        commentaire Varchar (50) ,
+        validation  Varchar (50)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 #------------------------------------------------------------
@@ -128,3 +128,26 @@ CREATE TABLE IF NOT EXISTS pointage (
 #------------------------------------------------------------
 
     ALTER TABLE formation ADD CONSTRAINT fk_formation_formateur FOREIGN KEY(idFormateur) REFERENCES formateur(idFormateur);
+
+#------------------------------------------------------------
+# VIEWS 
+#------------------------------------------------------------
+
+CREATE VIEW  pointages_par_semaines AS SELECT
+    p.idPointage, j.demiJournee, j.jour, s.numSemaine, s.mois, p.commentaire, p.validation
+FROM
+    pointageAfpa.pointage AS p,
+    pointageAfpa.journee AS j,
+    pointageAfpa.semaine AS s
+WHERE
+    p.idJournee = j.idJournee AND j.idSemaine = s.idSemaine;
+
+
+CREATE VIEW stagiaires_par_offres AS SELECT
+    s.idStagiaire, s.nom, s.prenom, s.numBenef, o.numOffre, f.codeFormation, f.libelleFormation
+FROM
+    pointageAfpa.stagiaire AS s,
+    pointageAfpa.offre AS o,
+    pointageAfpa.formation AS f
+WHERE
+    s.idOffre = o.idOffre AND o.idFormation = f.idFormation;
