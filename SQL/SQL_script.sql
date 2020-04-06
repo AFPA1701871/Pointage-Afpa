@@ -14,8 +14,8 @@ CREATE TABLE IF NOT EXISTS stagiaire (
         nom         Varchar (50) NOT NULL ,
         prenom      Varchar (50) NOT NULL ,
         motDePasse  Varchar (50) NOT NULL ,
-        numBenef    Varchar (50) NOT NULL,
-        idOffre     Int NOT NULL,
+        numBenef    Varchar (50) NOT NULL ,
+        idOffre     Int NOT NULL ,
         role        Int NOT NULL
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -37,10 +37,9 @@ CREATE TABLE IF NOT EXISTS formateur (
 #------------------------------------------------------------
 
 CREATE TABLE IF NOT EXISTS formation (
-        idFormation      Int  Auto_increment PRIMARY KEY  NOT NULL ,
+        idFormation      Int  Auto_increment PRIMARY KEY NOT NULL ,
         codeFormation    Varchar (50) NOT NULL ,
-        libelleFormation Varchar (100) NOT NULL,
-        idFormateur 	 Int NOT NULL
+        libelleFormation Varchar (100) NOT NULL
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 #------------------------------------------------------------
@@ -81,6 +80,7 @@ CREATE TABLE IF NOT EXISTS presence (
 CREATE TABLE IF NOT EXISTS offre (
         idOffre       Int  Auto_increment PRIMARY KEY  NOT NULL ,
         idFormation   Int NOT NULL ,
+        idFormateur   Int NOT NULL ,
         numOffre      Varchar (50) NOT NULL
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -114,6 +114,7 @@ CREATE TABLE IF NOT EXISTS pointage (
 #------------------------------------------------------------
 
     ALTER TABLE offre ADD CONSTRAINT fk_offre_formation FOREIGN KEY(idFormation) REFERENCES formation(idFormation);
+    ALTER TABLE offre ADD CONSTRAINT fk_offre_formateur FOREIGN KEY(idFormateur) REFERENCES formateur(idFormateur);
 
 #------------------------------------------------------------
 # FOREIGN KEY pointage
@@ -122,12 +123,6 @@ CREATE TABLE IF NOT EXISTS pointage (
     ALTER TABLE pointage ADD CONSTRAINT fk_pointage_stagiaire FOREIGN KEY(idStagiaire) REFERENCES stagiaire(idStagiaire);
     ALTER TABLE pointage ADD CONSTRAINT fk_pointage_journee FOREIGN KEY(idJournee) REFERENCES journee(idJournee);
     ALTER TABLE pointage ADD CONSTRAINT fk_pointage_presence FOREIGN KEY(idPresence) REFERENCES Presence(idPresence);
-
-#------------------------------------------------------------
-# FOREIGN KEY formation
-#------------------------------------------------------------
-
-    ALTER TABLE formation ADD CONSTRAINT fk_formation_formateur FOREIGN KEY(idFormateur) REFERENCES formateur(idFormateur);
 
 #------------------------------------------------------------
 # VIEWS 
