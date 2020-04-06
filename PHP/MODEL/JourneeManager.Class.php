@@ -46,7 +46,7 @@ class JourneeManager
     {
         $db = DbConnect::getDb();
         $tableau = [];
-        $q = $db->prepare("SELECT * FROM journee where idSemaine=".$idSemaine);
+        $q = $db->prepare("SELECT * FROM journee where idSemaine=".$idSemaine."order by idJournee");
         $q->execute();
         while ($donnees = $q->fetch(PDO::FETCH_ASSOC)) {
             if ($donnees != false) {
