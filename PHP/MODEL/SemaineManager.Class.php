@@ -42,15 +42,15 @@ class SemaineManager
     public static function getList()
     {
         $db = DbConnect::getDb();
-        $caisse = [];
+        $tableau = [];
         $q = $db->prepare("SELECT * FROM semaine");
         $q->execute();
         while ($donnees = $q->fetch(PDO::FETCH_ASSOC)) {
             if ($donnees != false) {
-                $caisse[] = new Semaine($donnees);
+                $tableau[] = new Semaine($donnees);
             }
         }
-        return $caisse;
+        return $tableau;
     }
 
 }

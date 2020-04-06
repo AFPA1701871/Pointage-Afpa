@@ -42,15 +42,15 @@ class PresenceManager
     public static function getList()
     {
         $db = DbConnect::getDb();
-        $caisse = [];
+        $tableau = [];
         $q = $db->prepare("SELECT * FROM presence");
         $q->execute();
         while ($donnees = $q->fetch(PDO::FETCH_ASSOC)) {
             if ($donnees != false) {
-                $caisse[] = new Presence($donnees);
+                $tableau[] = new Presence($donnees);
             }
         }
-        return $caisse;
+        return $tableau;
     }
 
 }

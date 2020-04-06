@@ -45,15 +45,15 @@ class JourneeManager
     public static function getListBySemaine($idSemaine)
     {
         $db = DbConnect::getDb();
-        $caisse = [];
+        $tableau = [];
         $q = $db->prepare("SELECT * FROM journee where idSemaine=".$idSemaine);
         $q->execute();
         while ($donnees = $q->fetch(PDO::FETCH_ASSOC)) {
             if ($donnees != false) {
-                $caisse[] = new Journee($donnees);
+                $tableau[] = new Journee($donnees);
             }
         }
-        return $caisse;
+        return $tableau;
     }
 
 }
