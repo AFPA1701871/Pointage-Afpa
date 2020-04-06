@@ -58,7 +58,7 @@ CREATE TABLE IF NOT EXISTS semaine (
 
 CREATE TABLE IF NOT EXISTS journee (
         idJournee   Int  Auto_increment  PRIMARY KEY NOT NULL ,
-        jour        Varchar (50) NOT NULL ,
+        jour        date NOT NULL ,
         demiJournee Varchar (50) NOT NULL ,
         idSemaine   Int NOT NULL
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -128,8 +128,8 @@ CREATE TABLE IF NOT EXISTS pointage (
 # VIEWS 
 #------------------------------------------------------------
 
-CREATE VIEW  pointages_par_semaines AS SELECT
-    p.idPointage, j.demiJournee, j.jour, s.numSemaine, s.mois, p.commentaire, p.validation
+CREATE VIEW IF NOT EXISTS pointages_par_semaines AS SELECT
+    p.idPointage, j.demiJournee, j.jour, j.idJournee, s.numSemaine, s.idSemaine, s.mois, p.commentaire, p.validation
 FROM
     pointageAfpa.pointage AS p,
     pointageAfpa.journee AS j,
@@ -138,8 +138,8 @@ WHERE
     p.idJournee = j.idJournee AND j.idSemaine = s.idSemaine;
 
 
-CREATE VIEW stagiaires_par_offres AS SELECT
-    s.idStagiaire, s.nom, s.prenom, s.numBenef, o.numOffre, f.codeFormation, f.libelleFormation
+CREATE VIEW IF NOT EXISTS stagiaires_par_offres AS SELECT
+    s.idStagiaire, s.nom, s.prenom, s.numBenef, o.idOffre, o.numOffre, f.idFormation, f.codeFormation, f.libelleFormation
 FROM
     pointageAfpa.stagiaire AS s,
     pointageAfpa.offre AS o,
