@@ -17,7 +17,7 @@ class FormationManager
     {
         $db = DbConnect::getDb();
         $q = $db->prepare("UPDATE formation SET  codeFormation=:codeFormation, libelleFormation=:libelleFormation, idFormateur=:idFormateur WHERE idFormation=:idFormation");
-        $q->bindValue(":idFormation", $obj->getIdFormateur());
+        $q->bindValue(":idFormation", $obj->getIdFormation());
         $q->bindValue(":codeFormation", $obj->getCodeFormation());
         $q->bindValue(":libelleFormation", $obj->getLibelleFormation());
         $q->bindValue(":idFormateur", $obj->getIdFormateur());

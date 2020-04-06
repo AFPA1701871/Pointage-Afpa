@@ -1,101 +1,88 @@
 <?php
-for ($i=1;$i<10;$i++)
-$p[] = PointageManager::findById(20+$i);
 
-$p[2]->setIdPresence('3');
-$p[4]->setIdPointage(null);
-var_dump($p);
-PointageManager::majPointage(1,1,$p);
+/******************** Test Formateur *********************/
 
-//--------------------------JourneeManager---------------------------//
-
-// $m = new Journee(["jour"=>"Mardi","demiJournee"=>"Apero_apres_midi","idSemaine"=>15]);
-// JourneeManager::add($m); // Valider
-
-// Update  :
-// $m = JourneeManager::findById(2);
-// $m->setJour("Jeudi");
-// JourneeManager::update($m); /// Valider
-
-
-// Delete :
-// $m = JourneeManager::findById(2);
-// JourneeManager::delete($m); // Valider
-
-// // Get Liste  :
-// $tableau = JourneeManager::getList();
-// foreach ($tableau as $info)
+// echo "tot";
+// $p = FormateurManager::findById(41);
+// $s = FormateurManager::getByMatricule("88CN001");
+// var_dump($p);
+// var_dump($s);
+// $p->setIdFormateur(null);
+// $p->setPrenom("Claud");
+// FormateurManager::add($p);
+// FormateurManager::update($p);
+// $tableau = FormateurManager::getList();
+// foreach ($tableau as $unFormateur)
 // {
-//     echo $info->toString();
+//     echo $unFormateur->toString();
 // }
-// Valider
+// FormateurManager::delete($p);
 
+/******************** Test Stagiaire *********************/
 
-//--------------------------PointageManager--------------------------//
-
-// $m = new Pointage(["idStagiaire"=>2,"idJournee"=>3,"idPresence"=>1,"commentaire"=>"J'aime les pates","validation"=>"OK"]);
-// PointageManager::add($m); // Valider
-
-//Update:
-// $m = PointageManager::findById(4);
-// $m->setCommentaire("J'aime le piment d'espelette");
-// PointageManager::update($m); //Valider
-
-
-// //Delete  :
-// $m = PointageManager::findById(4);
-// PointageManager::delete($m); // Valider
-
-// //Get Liste :
-// $tableau = PointageManager::getList();
-// foreach ($tableau as $info)
+// $p = StagiaireManager::findById(18);
+// $s = StagiaireManager::getByNumBenef("19124694");
+// var_dump($p);
+// var_dump($s);
+// $p->setIdStagiaire(null);
+// $p->setPrenom("Claud");
+// StagiaireManager::add($p);
+// StagiaireManager::update($p);
+// $tableau = StagiaireManager::getList();
+// foreach ($tableau as $unStagiaire)
 // {
-//     echo $info->toString();
+//     echo $unStagiaire->toString();
 // }
-// Valider
+// StagiaireManager::delete($p);
 
+/******************** Test Formation *********************/
 
-//--------------------------PresenceManager--------------------------//
-// $m = new Presence(["refPresence"=>"ppda","libellePresence"=>"Lala"]);
-// PresenceManager::add($m); // Valider
-
-//Update :
-// $m = PresenceManager::findById(2);
-// $m->setRefPresence("TOU");
-// PresenceManager::update($m); //Valider
-
-
-// // //Delete  :
-// $m = PresenceManager::findById(2);
-// PresenceManager::delete($m); // Valider
-
-// // //Get Liste E :
-// $tableau = PresenceManager::getList();
-// foreach ($tableau as $info)
+// $p = FormationManager::findById(14);
+// var_dump($p);
+// $p->setIdFormation(null);
+// $p->setLibelleFormation("BBBBB");
+// FormationManager::add($p);
+// FormationManager::update($p); 
+// var_dump($p);
+// $tableau = FormationManager::getList();
+// foreach ($tableau as $uneFormation)
 // {
-//     echo $info->toString();
+//     echo $uneFormation->toString();
 // }
-// Valider
+// FormationManager::delete($p);
 
+/******************** Test Offre *********************/
 
-//--------------------------SemaineManager---------------------------//
-// $m = new Semaine(["mois"=>"Juin","numSemaine"=>"6"]);
-// SemaineManager::add($m); // Valider
-
-//Update  :
-// $m = SemaineManager::findById(16);
-// $m->setMois("Juillet");
-// SemaineManager::update($m); //Valider
-
-
-// // //Delete  :
-// $m = SemaineManager::findById(16);
-// SemaineManager::delete($m); // Valider
-
-// //Get Liste  :
-// $tableau = SemaineManager::getList();
-// foreach ($tableau as $info)
+// $p = OffreManager::findById(22);
+// var_dump($p);
+// $p->setIdOffre(null);
+// $p->setNumOffre("1111111");
+// OffreManager::add($p);
+// OffreManager::update($p);
+// var_dump($p);
+// $tableau = OffreManager::getList();
+// foreach ($tableau as $uneOffre)
 // {
-//     echo $info->toString();
+//     echo $uneOffre->toString();
 // }
-// Valider
+// OffreManager::delete($p);
+
+/******************** Test pointage_par_semaine *********************/
+
+// $p = Pointages_par_semainesManager::findById(1);
+// var_dump($p);
+// $tableau = Pointages_par_semainesManager::getList();
+// foreach ($tableau as $unPointage)
+// {
+//     echo $unPointage->toString();
+// }
+
+/******************** Test stagiaire_par_offres *********************/
+
+// $p = Stagiaires_par_offresManager::findById(167);
+// var_dump($p);
+// $tableau = Stagiaires_par_offresManager::getList();
+// foreach ($tableau as $StagiaireparOffre)
+// {
+//     echo $StagiaireparOffre->toString();
+// }

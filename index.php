@@ -56,7 +56,8 @@ if (isset($_GET["action"]))
 else
 {
     //Sinon afficher la page par defaut
-    AfficherPage($routes["default"]);
+    //AfficherPage($routes["default"]);
     //Decommenter la ligne ci-dessous pour faire le testmanager
- //Utilisation pour le test manager AfficherPage(["php/model/", "test.manager", "Deconnexion"]);
+    $_SESSION['idOffre']=4;
+     AfficherPage(["php/view/", "pointage", "Deconnexion"]);
 }

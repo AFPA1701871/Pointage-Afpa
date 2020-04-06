@@ -63,6 +63,21 @@ class PointageManager
         }
         return $tableau;
     }
+    public static function getListByStagiaire($idStagiaire,$idSemaine)
+    {
+        $db = DbConnect::getDb();
+        $tableau = [];
+        $q = $db->prepare("SELECT * FROM pointage as p , journee as j where p.idJournee=j.idJournee and idStagiaire =".$idStagiaire." and j.idSemaine  = ".$idSemaine);
+        $q->execute();
+        while ($donnees = $q->fetch(PDO::FETCH_ASSOC))
+        {
+            if ($donnees != false)
+            {
+                $tableau[] = new Pointage($donnees);
+            }
+        }
+        return $tableau;
+    }
 
     /**
      * majPointage : met à jour le pointage d'un stagiaire pour une semaine donnée
@@ -89,6 +104,5 @@ class PointageManager
             $q->execute();
             $index++;
         }
-
     }
 }
