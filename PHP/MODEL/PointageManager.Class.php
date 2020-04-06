@@ -76,7 +76,6 @@ class PointageManager
     {
         $db = DbConnect::getDb();
         $lesJours = JourneeManager::getListBySemaine($idSemaine);
-        var_dump($lesJours);
         $index = 0;
         foreach ($lesJours as $uneJournee)
         {
