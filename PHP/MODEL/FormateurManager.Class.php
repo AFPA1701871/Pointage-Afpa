@@ -68,7 +68,7 @@ class FormateurManager
     static public function getByMatricule($pseudo) {
 		$db = DbConnect::getDb (); // Instance de PDO.
 		// Exécute une requête de type SELECT avec une clause WHERE, et retourne un objet Personne
-		$q = $db->prepare ( 'SELECT idFormateur, nom, prenom, motDePasse, role  FROM formateur WHERE matricule = :matricule' );
+		$q = $db->prepare ( 'SELECT idFormateur, matricule, nom, prenom, motDePasse, role  FROM formateur WHERE matricule = :matricule' );
 		
 		// Assignation des valeurs .
 		$q->bindValue ( ':matricule', $pseudo );

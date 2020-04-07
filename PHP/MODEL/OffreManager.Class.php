@@ -58,5 +58,18 @@ class OffreManager
         }
         return $offre;
     }
-
+    public static function getListByFormateur($id)
+    {
+        $db = DbConnect::getDb();
+        $offre = [];
+        $q = $db->query("SELECT * FROM offre WHERE idFormateur =".$id);
+        while ($donnees = $q->fetch(PDO::FETCH_ASSOC))
+        {
+            if ($donnees != false)
+            {
+                $offre[] = new Offre($donnees);
+            }
+        }
+        return $offre;
+    }
 }

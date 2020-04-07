@@ -40,16 +40,16 @@ else
             $formateur = FormateurManager::getByMatricule($_POST['identifiant']);
             if ($formateur->getMotDePasse() == md5($_POST['motDePasse'])) // Acces OK !
             {
-                $_SESSION['identifiant'] = $formateur->getMatricule();
+                $_SESSION['idFormateur'] = $formateur->getIdFormateur();
+                $_SESSION['matricule'] = $formateur->getMatricule();
                 $_SESSION['nom'] = $formateur->getNom();
                 $_SESSION['prenom'] = $formateur->getPrenom();
                 $_SESSION['role'] = $formateur->getRole();
                 $lvl = (isset($_SESSION['role'])) ? (int) $_SESSION['role'] : 1;
                 $message = '<p>Bienvenue ' . $formateur->getPrenom() ." ". $formateur->getNom() . ', vous êtes maintenant connecté!</p>';
-
                 if ($lvl==1)
                 {
-                    header("refresh:3,url=index.php?action=InterfaceFormateur");
+                    header("refresh:3,url=index.php?action=ChoixFormateur");
                 }
                 else {
                     header("refresh:3,url=index.php?action=InterfaceAT");

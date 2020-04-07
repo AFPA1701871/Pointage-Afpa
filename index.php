@@ -37,6 +37,7 @@ $routes = [
     "InterfaceStagiaire" => ["php/view/", "InterfaceStagiaire", "Stagiaire"],
     "InterfaceFormateur" => ["php/view/", "InterfaceFormateur", "Formateur"],
     "ChoixFormateur" => ["php/view/", "ChoixFormateur", "Formateur"],
+    "ActionFormateur" => ["php/view/", "ActionFormateur", "Formateur"],
     "InterfaceAT" => ["php/view/", "InterfaceAT", "Assistante Technique"],
     
 ];
