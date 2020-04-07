@@ -65,7 +65,7 @@ img{
    
 }
 
-form{
+.form-connect{
     background-color:var(--color-gris);
     width: 40vw;
     /* margin:10vh 30vw; */
@@ -125,6 +125,7 @@ label{
     flex: 1; 
     display: flex;
     flex-direction: column;
+    
 }
 .colonne-jour{
     flex:0.5;
@@ -154,8 +155,13 @@ textarea{
 .centre{
     display:flex;
    align-items: center;
-
+   flex-direction: row;
+   justify-content: center;
 }
+.checkbox{
+    flex:0.5;
+}
+
 
 
 
@@ -181,7 +187,7 @@ select {
 
 }
 
-input[type=submit],button {
+input[type=submit]{
     width: 50%;
     background-color:var(--color-bleu-fonce);
     color: white;
@@ -196,6 +202,23 @@ input[type=submit],button {
 input[type=submit]:hover ,button:hover{
     background-color:var(--color-bleu-clair);
 }
+.btna{
+    width: 20%;
+    background-color:var(--color-bleu-fonce);
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 2px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.5s;
+    font-weight: 700;
+    text-align: center;
+    text-decoration: none;
+}
+.btna:hover{
+    background-color:var(--color-bleu-clair);
+}
+
 
 /************Footer***************/
 

@@ -2,6 +2,7 @@
 if (isset($_SESSION['matricule'])) {
     $liste = OffreManager::getListByFormateur($_SESSION['idFormateur']); // on va chercher les offres du formateur
     if (count($liste) == 1) { // si il n'y a qu'une offre
+        $_SESSION['idOffre']=$liste[0]->getIdOffre();
         header('Location: index.php?action=InterfaceFormateur'); // redirection vers la page de poointage
         // sinon on laisse charger cette page
     }

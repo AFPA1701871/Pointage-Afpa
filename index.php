@@ -32,14 +32,14 @@ $routes = [
     "default" => ["php/view/", "Connexion", "Connexion"],
 
     "connexion" => ["php/view/", "Connexion", "Connexion"],
-    "deconnexion" => ["php/view/", "deconnexionAction", "Deconnexion"],
+    "deconnexion" => ["php/view/", "Deconnexion", "Deconnexion"],
     
     "InterfaceStagiaire" => ["php/view/", "InterfaceStagiaire", "Stagiaire"],
     "InterfaceFormateur" => ["php/view/", "InterfaceFormateur", "Formateur"],
     "ChoixFormateur" => ["php/view/", "ChoixFormateur", "Formateur"],
     "ActionFormateur" => ["php/view/", "ActionFormateur", "Formateur"],
-    "InterfaceAT" => ["php/view/", "InterfaceAT", "Assistante Technique"],
-    
+    "InterfaceAT" => ["php/view/", "InterfaceAT", "Interface AT"],
+    "exporterCSV" => ["php/view/", "ExporterCSV", "Exporter CSV"]
 ];
 
 if (isset($_GET["action"]))

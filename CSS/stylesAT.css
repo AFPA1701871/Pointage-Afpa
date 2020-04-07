@@ -1,0 +1,44 @@
+body{
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.listePointages{
+    display: flex;
+    flex-direction: column;
+    margin: 4vh 2vw;
+    border: 1px solid black;
+    width: 40vw;
+    justify-content: center;
+    align-items: center;
+}
+
+.entete{
+    background-color: burlywood;
+    border-bottom: 1px solid black;;
+}
+
+.ligne{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+.ligne div{
+    padding: 1vh 1vw;
+    flex: 1;
+    text-align: center;
+}
+
+.bouton{
+    color: black;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    max-width: 10vw;
+    margin: 1vh 1vw;
+    padding: 1vh 1vw;
+    background-color: burlywood;
+    border: 1px solid black;
+}

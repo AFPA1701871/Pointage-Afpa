@@ -11,8 +11,8 @@ else
     if (empty($_POST['identifiant']) || empty($_POST['motDePasse'])) // Oublie d'un champ         
     {
         $message = '<p>une erreur s\'est produite pendant votre identification.
-	                   Vous devez remplir tous les champs</p>
-	                   <p>Cliquez <a href="index.php?action=connect">ici</a> pour revenir</p>';
+                       Vous devez remplir tous les champs</p>
+                       <p>Cliquez <a href="index.php?action=connexion">ici</a> pour revenir</p>';
     } 
     else // On check le mot de passe
     {
@@ -25,14 +25,13 @@ else
                 $_SESSION['nom'] = $stagiaire->getNom();
                 $_SESSION['prenom'] = $stagiaire->getPrenom();
                 $message = '<p>Bienvenue ' . $stagiaire->getPrenom() ." ". $stagiaire->getNom() . ', vous êtes maintenant connecté!</p>';
-
                 header("refresh:3,url=index.php?action=InterfaceStagiaire");
             }
             else // Acces pas OK !
             {
-                $message = '<p>Une erreur s\'est produite 	    pendant votre identification.<br /> Le mot de passe ou le pseudo
+                $message = '<p>Une erreur s\'est produite pendant votre identification.<br /> Le mot de passe ou l\'identifiant
                 entré n\'est pas correcte.</p>';
-                header("refresh:3,url=index.php?action=connect");
+                header("refresh:3,url=index.php?action=connexion");
             }
         }
         else
@@ -47,6 +46,7 @@ else
                 $_SESSION['role'] = $formateur->getRole();
                 $lvl = (isset($_SESSION['role'])) ? (int) $_SESSION['role'] : 1;
                 $message = '<p>Bienvenue ' . $formateur->getPrenom() ." ". $formateur->getNom() . ', vous êtes maintenant connecté!</p>';
+
                 if ($lvl==1)
                 {
                     header("refresh:3,url=index.php?action=ChoixFormateur");
@@ -57,12 +57,10 @@ else
             }
             else // Acces pas OK !
             {
-                $message = '<p>Une erreur s\'est produite 	    pendant votre identification.<br /> Le mot de passe ou le pseudo
+                $message = '<p>Une erreur s\'est produite pendant votre identification.<br /> Le mot de passe ou l\'identifiant
                 entré n\'est pas correcte.</p>';
-                header("refresh:3,url=index.php?action=connect");
+                header("refresh:3,url=index.php?action=connexion");
             }
         }
     }echo $message;
 } 
-
-
