@@ -83,5 +83,24 @@ class StagiaireManager
 			return new Stagiaire ( $donnees );
 		}
 	}
-
+/**
+     * getStagiairesParOffres : Renvoi la liste des stagiaires attachés à une offre
+     *
+     * @param  mixed $idOffre
+     * @return void : liste d'objet Stagiaires
+     */
+    public static function getStagiairesParOffres($idOffre)
+    {
+        $db = DbConnect::getDb();
+        $stagiaires = [];
+        $q = $db->query("SELECT * FROM stagiaires where idOffre = ".$idOffre);
+        while ($donnees = $q->fetch(PDO::FETCH_ASSOC))
+        {
+            if ($donnees != false)
+            {
+                $stagiaires[] = new Stagiaire($donnees);
+            }
+        }
+        return $stagiaires;
+    }
 }

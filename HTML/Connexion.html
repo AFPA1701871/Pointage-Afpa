@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="utf-8">
+    <title>formulaire</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width-device-width,initial-scale=1">
+    <script src="https://kit.fontawesome.com/13bc1841db.js" crossorigin="anonymous"></script>
+</head>
+    
+<body>
+
+    <header>
+        <div class="logo">
+            <img src="../Img/Logo_Afpa.jpg" alt="Logo Afpa"></div>
+        <div id="title">Page d'accueil</div>
+        <div class="esp"></div>
+
+    </header>
+
+    <div class="content">
+        <form class="connect-form" action="" method="post">
+            <fieldset>
+                <legend>Connexion :</legend>
+                <div class="contenu">
+                    <label for="choix">Choix Utilisateur :</label>
+                    <div class="ligne">
+                    <select name="user" id="user-select">
+                        <option value="formateur">Formateur</option>
+                        <option value="stagiaire">Stagiaire</option>
+                        <option value="at">Assistant Technique</option>
+                    </select>
+                   
+                </div>
+                </div>
+
+                <div class="contenu">
+                    <label for="identifiant">Identifiant :</label>
+                    <div class="ligne">
+                    <input type="text" name="identifiant" id="identifiant" maxlength="50" pattern="" placeholder="Matricule ou Numéro bénéficiaire" required>
+                    <i class="fas fa-question-circle" title="test"></i>
+                </div>
+            </div>
+
+                <div class="contenu">
+                    <label for="password">Mot de passe :</label>
+                    <div class="ligne">
+                    <input type="password" id="motDePasse" name="motDePasse" pattern=""  placeholder="***********" required >
+                    <i class="fas fa-question-circle" title="test"></i>
+                </div>
+                </div>
+
+                <div class="centrer">
+                    <input class="bouton centrer" type="submit" value="Valider" />
+                </div>
+            </fieldset>
+        </form>
+
+
+    </div>
+    <footer>
+        <p>Afpa @ Copyright 2020</p>
+    </footer>
+
+</body>
+
+</html>

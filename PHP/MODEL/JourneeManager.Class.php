@@ -60,30 +60,27 @@ class JourneeManager
         return $tableau;
     }    
     /**
-     * semaineEnCours
+     * getSemaineEnCours
      *
      * @return void renvoi l'id de la semaine
      */
-    public static function semaineEnCours()
+    public static function getSemaineEnCours()
     {
         $db = DbConnect::getDb();
         $tableau = [];
         $q = $db->prepare("SELECT idSemaine FROM journee where jour=CURDATE()");
         $q->execute();
         $donnees = $q->fetch(PDO::FETCH_ASSOC)['idSemaine'];
-        var_dump($donnees);
         if ($donnees == null)
         {//cas du samedi
             $q = $db->prepare("SELECT idSemaine FROM journee where jour=CURDATE()-1");
             $q->execute();
             $donnees = $q->fetch(PDO::FETCH_ASSOC)['idSemaine'];
-            var_dump($donnees);
             if ($donnees == null)
             {//cas du dimanche
                 $q = $db->prepare("SELECT idSemaine FROM journee where jour=CURDATE()-2");
                 $q->execute();
                 $donnees = $q->fetch(PDO::FETCH_ASSOC)['idSemaine'];
-                var_dump($donnees);
             }
         }
         return $donnees;

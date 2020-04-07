@@ -51,7 +51,7 @@ class PointagesParSemainesManager
         $result = $q->fetch(PDO::FETCH_ASSOC)['idSemaine'];
         if ($result == null)
         {
-            return SemaineManager::findById(JourneeManager::semaineEnCours());
+            return SemaineManager::findById(JourneeManager::getSemaineEnCours());
         }
         else
         {

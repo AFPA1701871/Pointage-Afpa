@@ -127,7 +127,8 @@ CREATE TABLE IF NOT EXISTS pointage (
 #------------------------------------------------------------
 # VIEWS 
 #------------------------------------------------------------
-DROP view pointages_par_semaines;
+
+DROP VIEW IF EXISTS pointages_par_semaines;
 CREATE VIEW pointages_par_semaines AS SELECT
     p.idPointage, p.idStagiaire,p.idPresence, j.demiJournee, j.jour, j.idJournee, s.numSemaine, s.idSemaine, s.mois, p.commentaire, p.validation
 FROM
@@ -137,7 +138,7 @@ FROM
 WHERE
     p.idJournee = j.idJournee AND j.idSemaine = s.idSemaine;
 
-DROP view stagiaires_par_offres;
+DROP VIEW IF EXISTS stagiaires_par_offres;
 CREATE VIEW  stagiaires_par_offres AS SELECT
     s.idStagiaire, s.nom, s.prenom, s.numBenef, o.idOffre, o.numOffre, f.idFormation, f.codeFormation, f.libelleFormation
 FROM

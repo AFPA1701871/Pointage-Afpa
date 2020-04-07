@@ -31,18 +31,6 @@ class StagiairesParOffresManager
         }
         return $stagiaires;
     }
-    public static function getStagiairesParOffres($idOffre)
-    {
-        $db = DbConnect::getDb();
-        $stagiaires = [];
-        $q = $db->query("SELECT * FROM stagiaires_par_offres where idOffre = ".$idOffre);
-        while ($donnees = $q->fetch(PDO::FETCH_ASSOC))
-        {
-            if ($donnees != false)
-            {
-                $stagiaires[] = new StagiairesParOffres($donnees);
-            }
-        }
-        return $stagiaires;
-    }
+        
+    
 }

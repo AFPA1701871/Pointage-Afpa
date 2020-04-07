@@ -3,7 +3,7 @@
 $idOffre = $_SESSION['idOffre'];
 $semaineEnCours = PointagesParSemainesManager::getSemaineEnCoursOffre($idOffre);
 $lesJours = JourneeManager::getListBySemaine($semaineEnCours->getIdSemaine());
-$listeStagiaires = StagiairesParOffresManager::getStagiairesParOffres($idOffre);
+$listeStagiaires = StagiaireManager::getStagiairesParOffres($idOffre);
 
 function optionComboBox($code)
 {

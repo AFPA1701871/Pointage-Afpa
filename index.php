@@ -56,8 +56,8 @@ if (isset($_GET["action"]))
 else
 {
     //Sinon afficher la page par defaut
-    //AfficherPage($routes["default"]);
+    AfficherPage($routes["default"]);
     //Decommenter la ligne ci-dessous pour faire le testmanager
-    $_SESSION['idOffre']=4;
-     AfficherPage(["php/view/", "pointage", "Deconnexion"]);
+    // $_SESSION['idOffre']=4;
+    //  AfficherPage(["php/view/", "pointage", "Deconnexion"]);
 }
