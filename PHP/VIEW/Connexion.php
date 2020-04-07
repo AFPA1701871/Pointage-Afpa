@@ -14,8 +14,8 @@ if (!isset($_POST['nom'])) // On est dans la page de formulaire
     } else // On check le mot de passe
     {
 
-        $stagiaire = StagiaireManager::get($_POST['NumBenef']);
-        $formateur = FormateurManager::get($_POST['Matricule']);
+        $stagiaire = StagiaireManager::findById($_POST['NumBenef']);
+        $formateur = FormateurManager::findById($_POST['Matricule']);
 
         if ($stagiaire->getMotDePasse() == md5($_POST['motDePasse'])) // Acces OK !
         {

@@ -18,7 +18,7 @@
                 <div class="contenu">
                     <label for="identifiant">Identifiant :</label>
                     <div class="ligne">
-                    <input type="text" name="identifiant" id="identifiant" maxlength="50" pattern="" placeholder="Matricule ou Numéro bénéficiaire" required>
+                    <input type="text" name="identifiant" id="identifiant" maxlength="50"  placeholder="Matricule ou Numéro bénéficiaire" required>
                     <i class="fas fa-question-circle" title="test"></i>
                 </div>
             </div>
@@ -26,7 +26,7 @@
                 <div class="contenu">
                     <label for="password">Mot de passe :</label>
                     <div class="ligne">
-                    <input type="password" id="motDePasse" name="motDePasse" pattern=""  placeholder="***********" required >
+                    <input type="password" id="motDePasse" name="motDePasse"   placeholder="***********" required >
                     <i class="fas fa-question-circle" title="test"></i>
                 </div>
                 </div>

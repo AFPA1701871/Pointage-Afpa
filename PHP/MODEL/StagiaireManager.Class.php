@@ -93,7 +93,7 @@ class StagiaireManager
     {
         $db = DbConnect::getDb();
         $stagiaires = [];
-        $q = $db->query("SELECT * FROM stagiaires where idOffre = ".$idOffre);
+        $q = $db->query("SELECT * FROM stagiaire where idOffre = ".$idOffre);
         while ($donnees = $q->fetch(PDO::FETCH_ASSOC))
         {
             if ($donnees != false)

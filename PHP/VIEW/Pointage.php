@@ -5,21 +5,6 @@ $semaineEnCours = PointagesParSemainesManager::getSemaineEnCoursOffre($idOffre);
 $lesJours = JourneeManager::getListBySemaine($semaineEnCours->getIdSemaine());
 $listeStagiaires = StagiaireManager::getStagiairesParOffres($idOffre);
 
-function optionComboBox($code)
-{
-    $select = "<select>";
-    $liste = PresenceManager::getList();
-
-    foreach ($liste as $elt) {
-        if ($code == $elt->getRefPresence()) { // si le code entré en paramètre est égale à l'élément alors c'est celui qui est selectionné
-            $select .= '<option value="' . $elt->getRefPresence() . '" SELECTED>' . $elt->getLibellePresence() . '</option>';
-        } else {
-            $select .= '<option value="' . $elt->getRefPresence() . '">' . $elt->getLibellePresence() . '</option>';
-        }
-    }
-    $select .= "</select>";
-    return $select;
-}
 
 ?>
 
@@ -39,6 +24,7 @@ function optionComboBox($code)
         foreach($listeStagiaires as $stagiaire)
         {
             $pointage = PointageManager::getListByStagiaire($stagiaire->getIdStagiaire(), $semaineEnCours->getIdSemaine());
+            $longueur = count($pointage);
             echo '<div class="ligne-stagiaire">';
             echo '  <div class="case-stagiaire">'.$stagiaire->getNom().' '.$stagiaire->getPrenom().'</div>';
             echo '  <div class="lignes-moment">
@@ -49,14 +35,15 @@ function optionComboBox($code)
             // Pour chaque matinée
             for($i=0; $i<10; $i+=2)
             {
-                if($i<count($pointage))
+                if($i<$longueur)
                 {
-                    $affichage = optionComboBox($pointage[$i]->getIdPresence());
+                    var_dump($pointage[$i]->getIdPresence());
+                    $affichage = optionComboBox($pointage[$i]->getIdPresence(),2);
                     $commente  = $pointage[$i]->getCommentaire();
                 }
                 else
                 {
-                    $affichage = optionComboBox(null);
+                    $affichage = optionComboBox(null,2);
                     $commente  = "";
                 }; 
 
@@ -74,14 +61,14 @@ function optionComboBox($code)
             // Pour chaque après-midi
             for($i=1; $i<10; $i+=2)
             {
-                if($i<=count($pointage))
+                if($i<=$longueur)
                 {
-                    $affichage = optionComboBox($pointage[$i]->getIdPresence());
+                    $affichage = optionComboBox($pointage[$i]->getIdPresence(),2);
                     $commente  = $pointage[$i]->getCommentaire();
                 }
                 else
                 {
-                    $affichage = optionComboBox(null);
+                    $affichage = optionComboBox(null,2);
                     $commente  = "";
                 }; 
                 echo '
@@ -101,7 +88,7 @@ function optionComboBox($code)
     echo   '<div class="pied-de-page">
                 <div class="jour"></div>
                 <div class="jour"></div>';
-    $longueur = count($pointage);
+
 
     for($i=0; $i<10; $i+=2)
     {
