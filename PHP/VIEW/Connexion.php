@@ -22,6 +22,8 @@ else
             if ($stagiaire->getMotDePasse() == md5($_POST['motDePasse'])) // Acces OK !
             {
                 $_SESSION['identifiant'] = $stagiaire->getNumBenef();
+                $_SESSION['idStagiaire'] = $stagiaire->getIdStagiaire();
+                $_SESSION['idOffre'] = $stagiaire->getIdOffre();
                 $_SESSION['nom'] = $stagiaire->getNom();
                 $_SESSION['prenom'] = $stagiaire->getPrenom();
                 $message = '<p>Bienvenue ' . $stagiaire->getPrenom() ." ". $stagiaire->getNom() . ', vous êtes maintenant connecté!</p>';

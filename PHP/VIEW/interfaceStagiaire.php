@@ -1,7 +1,8 @@
 <?php
 
 $idOffre = $_SESSION['idOffre'];
-$semaineEnCours = PointagesParSemainesManager::getSemaineEnCoursOffre($idOffre);
+$semaineEnCours = JourneeManager::getSemaineEnCours();
+
 $lesJours = JourneeManager::getListBySemaine($semaineEnCours->getIdSemaine());
 $idStagiaire=$_SESSION['idStagiaire'];
 $stagiaire = StagiaireManager::findById($idStagiaire);
@@ -10,17 +11,18 @@ $stagiaire = StagiaireManager::findById($idStagiaire);
     <div class="liste-pointage">
 
         <div class="en-tete">
-            <div class="jour">SEMAINE n°<?php $semaineEnCours->getNumSemaine() ?></div>
+            <div class="jour">SEMAINE n°<?php echo $semaineEnCours->getNumSemaine() ?></div>
             <div class="jour">JOUR:</div>
-            <div class="jour">LUNDI <?php $lesJours[0]->getJour() ?></div>
-            <div class="jour">MARDI <?php $lesJours[2]->getJour() ?></div>
-            <div class="jour">MERCREDI <?php $lesJours[4]->getJour() ?></div>
-            <div class="jour">JEUDI <?php $lesJours[6]->getJour() ?></div>
-            <div class="jour">VENDREDI <?php $lesJours[8]->getJour() ?></div>
+            <div class="jour">LUNDI <?php echo  $lesJours[0]->getJour() ?></div>
+            <div class="jour">MARDI <?php echo $lesJours[2]->getJour() ?></div>
+            <div class="jour">MERCREDI <?php echo $lesJours[4]->getJour() ?></div>
+            <div class="jour">JEUDI <?php echo $lesJours[6]->getJour() ?></div>
+            <div class="jour">VENDREDI <?php echo $lesJours[8]->getJour() ?></div>
         </div>
             
 <?php   
-            $pointage = PointageManager::getListByStagiaire($semaineEnCours->getIdSemaine(), $idStagiaire);
+            $pointage = PointageManager::getListByStagiaire($idStagiaire,$semaineEnCours->getIdSemaine());
+            $longueur=count($pointage);
             echo '<div class="ligne-stagiaire">';
         echo '  <div class="case-stagiaire">'.$stagiaire->getNom().' '.$stagiaire->getPrenom().'/n '.$stagiaire->getNumBenef().'</div>';
             echo '  <div class="lignes-moment">
@@ -33,7 +35,6 @@ $stagiaire = StagiaireManager::findById($idStagiaire);
             {
                 if($i<$longueur)
                 {
-                    var_dump($pointage[$i]->getIdPresence());
                     $affichage = optionComboBox($pointage[$i]->getIdPresence(),2);
                     $commente  = $pointage[$i]->getCommentaire();
                 }
@@ -57,7 +58,7 @@ $stagiaire = StagiaireManager::findById($idStagiaire);
             // Pour chaque après-midi
             for($i=1; $i<10; $i+=2)
             {
-                if($i<=$longueur)
+                if($i<$longueur)
                 {
                     $affichage = optionComboBox($pointage[$i]->getIdPresence(),2);
                     $commente  = $pointage[$i]->getCommentaire();

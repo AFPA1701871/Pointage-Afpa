@@ -49,6 +49,7 @@ $listeStagiaires = StagiaireManager::getStagiairesParOffres($idOffre);
                     $commente  = "";
                 }
                 $compteur++;
+                if ($i<9)
                 echo '<!--Lundi-->
                 <div class="case">
                     <div id="code-presence">'.$affichage.'</div>
@@ -56,6 +57,15 @@ $listeStagiaires = StagiaireManager::getStagiairesParOffres($idOffre);
                 <div class="case">
                     <div id="motif">'.$commente.'</div>
                 </div>';
+                else{
+                    echo '<div class="case">
+                    <div id="code-presence"></div>
+                </div>
+                <div class="case">
+                    <div id="motif"></div>
+                </div>';
+
+                }
 
                 if($compteur == 2){
                     $compteur = 0;

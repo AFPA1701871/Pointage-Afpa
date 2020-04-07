@@ -62,7 +62,7 @@ class JourneeManager
     /**
      * getSemaineEnCours
      *
-     * @return void renvoi l'id de la semaine
+     * @return void renvoi un objet semaine
      */
     public static function getSemaineEnCours()
     {
@@ -83,6 +83,6 @@ class JourneeManager
                 $donnees = $q->fetch(PDO::FETCH_ASSOC)['idSemaine'];
             }
         }
-        return $donnees;
+        return SemaineManager::findById($donnees);
     }
 }
