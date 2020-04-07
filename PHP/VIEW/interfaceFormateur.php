@@ -37,7 +37,6 @@ $listeStagiaires = StagiaireManager::getStagiairesParOffres($idOffre);
             {
                 if($i<$longueur)
                 {
-                    var_dump($pointage[$i]->getIdPresence());
                     $affichage = optionComboBox($pointage[$i]->getIdPresence(),2);
                     $commente  = $pointage[$i]->getCommentaire();
                 }
