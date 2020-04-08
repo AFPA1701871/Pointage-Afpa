@@ -18,3 +18,4 @@ Interface AT
 
 Divers
 	Enrichir le pied de page avec un nom d'équipe ou un logo
+	Faire des tests dans toutes les situations
