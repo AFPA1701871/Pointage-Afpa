@@ -4,9 +4,8 @@ $idOffre = $_SESSION['idOffre'];
 $semaineEnCours = PointagesParSemainesManager::getSemaineEnCoursOffre($idOffre);
 $lesJours = JourneeManager::getListBySemaine($semaineEnCours->getIdSemaine());
 $listeStagiaires = StagiaireManager::getStagiairesParOffres($idOffre);
-
+$nombreOffre = count(OffreManager::getListByFormateur($_SESSION['idFormateur'])); // on compte le nombre d'offres du.de la formateur.rice connecté.e
 ?>
-
     <div id="tableau">
         <div class="enTete">
             <div class="colonne">Nom/prenom</div>
@@ -17,8 +16,9 @@ $listeStagiaires = StagiaireManager::getStagiairesParOffres($idOffre);
             <div class="colonne">Jeudi <?php $lesJours[6]->getJour()?></div>
             <div class="colonne">Vendredi <?php $lesJours[8]->getJour()?></div>
         </div>
-
 <?php
+echo  '<form action="index.php?action="ActionInterfaceFormateur" method="POST">';
+
 foreach ($listeStagiaires as $stagiaire)
 {
     $pointage = PointageManager::getListByStagiaire($stagiaire->getIdStagiaire(), $semaineEnCours->getIdSemaine());
@@ -45,6 +45,10 @@ foreach ($listeStagiaires as $stagiaire)
                 // Ajouter un test sur la validation
                 // si validé -> input
                 // sinon combo
+                // POUR NABIL
+
+                //if(:
+
                 $affichage = optionComboBox($pointage[$indexPointage]->getIdPresence(), 2);
                 $commente = $pointage[$indexPointage]->getCommentaire();
                 
@@ -66,38 +70,39 @@ foreach ($listeStagiaires as $stagiaire)
         {
             echo '<!--Lundi-->
                 <div class="case">
-                    <div id="code-presence">' . $affichage . '</div>
+                    <div>' . $affichage . '</div>
                 </div>
                 <div class="case">
-                    <div id="motif">' . $commente . '</div>
+                    <div>' . $commente . '</div>
                 </div>';
         }
         else
         {
             echo '<div class="case">
-                    <div id="code-presence"></div>
+                    <div></div>
                 </div>
                 <div class="case">
-                    <div id="motif"></div>
+                    <div ></div>
                 </div>';
 
         }
 
-        if ($compteur == 2)
+        if ($compteur == 2 && $i<9)
         {
             $compteur = 0;
-            echo '</div> <div class="colonne">';
-        }    
+            echo '</div><!--'.$i.'--> <div class="colonne">';
+        }  
+
         $indexPointage++;
     }
 
     echo '</div></div>';
     //         <div class="colonne">
     //         <div class="case">
-    //         <div id="code-presence">'.optionComboBox($pointage[8]->getIdPresence(),2).'</div>
+    //         <div >'.optionComboBox($pointage[8]->getIdPresence(),2).'</div>
     //     </div>
     //     <div class="case">
-    //         <div id="motif">'.$pointage[8]->getCommentaire().'</div>
+    //         <div >'.$pointage[8]->getCommentaire().'</div>
     //     </div>';
 
 }
@@ -117,19 +122,15 @@ for ($i = 0; $i < 10; $i += 2)
     echo '</div>';
 }
 
-echo '</div>';
-?>
+echo '</div>
+    <div class="colonne centre">
+        <input class="btna" type="submit" value="Enregistrer">';
 
-    </div>
-        <div class="boutonsTableau">
-            <div class="colonne "></div>
-            <div class="colonne-jour"></div>
-            <div class="colonne centre"><button type="button">OK</button></div>
-            <div class="colonne centre"><button type="button">OK</button></div>
-            <div class="colonne centre"><button type="button">OK</button></div>
-            <div class="colonne centre"><button type="button">OK</button></div>
-            <div class="colonne centre"><button type="button">OK</button></div>
-        </div>
+        if ($nombreOffre > 1) // si il y a plus d'une offre
+        { 
+            echo '<a class="btna" href="index.php?action=ChoixFormateur">Retour</a>'; // on affiche un bouton 'retour' qui amène aux choix de formations
+        }
 
-    </div>
-
+echo '</div>
+</form>
+    </div>';

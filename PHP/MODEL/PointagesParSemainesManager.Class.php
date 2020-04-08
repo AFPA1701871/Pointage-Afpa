@@ -50,7 +50,7 @@ class PointagesParSemainesManager
         {
             $result[] = $donnees['validation'];
         }
-
+        if (! isset($result)) return $semaineActuelle; //quand il n'y a pas de pointage sur cette offre
         if (count($result) == 9 && array_search("0", $result)==false)
         { //on renvoi la semaine en cours
             return $semaineActuelle;

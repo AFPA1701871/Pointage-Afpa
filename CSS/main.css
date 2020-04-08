@@ -30,6 +30,10 @@ header{
     /* flex:9; */
 
 }
+header div#bienvenue div.centrer a{
+     text-decoration: none;
+     color:var(--color-bleu-fonce);
+}
 img{
     width: 30%;
 }
@@ -65,7 +69,7 @@ img{
    
 }
 
-.form-connect{
+.connect-form{
     background-color:var(--color-gris);
     width: 40vw;
     /* margin:10vh 30vw; */
@@ -102,6 +106,10 @@ label{
     font-size: 1.3em;
     padding: 0 1vw;
 }
+p{
+    text-align: center;
+    
+}
 
 /***************Tableau***************/
 #tableau{
@@ -117,15 +125,20 @@ label{
     flex:1;
     text-align: center;
     padding:1vw 0;
-    
-
-    
+        
 }
 .colonne{
     flex: 1; 
     display: flex;
     flex-direction: column;
     
+}
+.row{
+    flex: 1; 
+    display: flex;    
+}
+.jour{
+    display: flex;
 }
 .colonne-jour{
     flex:0.5;
@@ -136,6 +149,7 @@ label{
     text-align: center;
     align-items: center;
     color:var(--color-vert-fonce);
+     border-bottom: 2px solid var(--color-blanc);
 }
 .espv{
     height: 15vh;
@@ -161,12 +175,6 @@ textarea{
 .checkbox{
     flex:0.5;
 }
-
-
-
-
-
-
 
 /************Boutons************/
 input,
@@ -219,6 +227,9 @@ input[type=submit]:hover ,button:hover{
     background-color:var(--color-bleu-clair);
 }
 
+.dessusFooter {
+    margin-bottom: 10vh;
+}
 /************Footer***************/
 
 footer{
@@ -285,4 +296,3 @@ footer img{
     }
 
 }
-
