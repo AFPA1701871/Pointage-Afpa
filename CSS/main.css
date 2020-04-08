@@ -110,7 +110,14 @@ p{
     text-align: center;
     
 }
-
+.motDePasse{
+    position: relative;
+}
+#oeil{  
+    position: absolute;
+    right:5vw;
+    cursor: pointer;
+}
 /***************Tableau***************/
 #tableau{
     display: flex;
