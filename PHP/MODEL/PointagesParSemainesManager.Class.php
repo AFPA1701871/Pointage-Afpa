@@ -31,7 +31,7 @@ class PointagesParSemainesManager
         }
         return $pointages;
     }
-        
+
     /**
      * getSemaineEnCoursOffre : renvoi la semaine en cours en fonction du numero d'offre et de l'etat de validation des pointages
      *
@@ -40,23 +40,25 @@ class PointagesParSemainesManager
      */
     public static function getSemaineEnCoursOffre($idOffre)
     {
+        $semaineActuelle = SemaineManager::findById(JourneeManager::getSemaineEnCours()->getIdSemaine());
         $db = DbConnect::getDb();
-        //on cherche la dernière semaine de pointage
-        $q = $db->prepare("SELECT max(idSemaine) as max  FROM pointages_par_semaines as p ,stagiaire as s  WHERE p.idStagiaire =s.idStagiaire and   s.IdOffre=" . $idOffre);
+        //on regarde si la semaine précédente est validée
+        $idSemainePrecedente = $semaineActuelle->getIdSemaine() - 1;
+        $q = $db->prepare("SELECT validation FROM pointages_par_semaines AS p, stagiaire AS s WHERE p.idStagiaire = s.idStagiaire AND s.IdOffre = " . $idOffre . " AND idSemaine = " . $idSemainePrecedente . " GROUP BY idJournee");
         $q->execute();
-        $max = $q->fetch(PDO::FETCH_ASSOC)['max'];
-        //on regarde si cette semaine est validée
-        $q = $db->prepare("SELECT distinct(idSemaine) as idSemaine FROM pointages_par_semaines as p ,stagiaire as s  WHERE p.idStagiaire =s.idStagiaire and s.IdOffre=" . $idOffre . " and idSemaine = " . $max . " and validation is null");
-        $q->execute();
-        $result = $q->fetch(PDO::FETCH_ASSOC)['idSemaine'];
-        if ($result == null)
+        while ($donnees = $q->fetch(PDO::FETCH_ASSOC))
         {
-            return SemaineManager::findById(JourneeManager::getSemaineEnCours());
-        }
-        else
-        {
-            return SemaineManager::findById($result);
+            $result[] = $donnees['validation'];
         }
 
+        if (count($result) == 9 && array_search("0", $result)==false)
+        { //on renvoi la semaine en cours
+            return $semaineActuelle;
+        }
+        else
+        { //si un pointage n'est pas validé, on renvoi la semaine precedente
+            return SemaineManager::findById($semaineActuelle->getIdSemaine() - 1);
+
+        }
     }
 }

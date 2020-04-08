@@ -219,17 +219,32 @@ input[type=submit]:hover ,button:hover{
     background-color:var(--color-bleu-clair);
 }
 
-
 /************Footer***************/
 
 footer{
     position: fixed;
     bottom :0;
+    height: 10vh;
     width: 100%;
-    background-color: var(--color-vert-afpa);;
-    color: honeydew;
-    font-size: 1em;
+    background-color: var(--color-vert-afpa);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+footer .espace{
+    flex: 0.2;
+    padding-left: 2vw;
+}
+footer p{
+    flex: 2;
     text-align: center;
+    color:var(--color-blanc);
+
+}
+footer img{
+    flex: 0.2;
+    padding-right: 2vw;
+    max-height: 10vh;
 }
 
 

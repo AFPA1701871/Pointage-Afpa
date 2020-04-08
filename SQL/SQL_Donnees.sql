@@ -441,7 +441,7 @@ insert into stagiaire (numBenef,Nom,Prenom,idOffre,motDePasse,role) values('1912
 insert into stagiaire (numBenef,Nom,Prenom,idOffre,motDePasse,role) values('19129245','SCHMITZ','ALEXANDRE','1',md5('19129245'),1);
 insert into stagiaire (numBenef,Nom,Prenom,idOffre,motDePasse,role) values('19135166','TERRYN','TEDDY','1',md5('19135166'),1);
 insert into stagiaire (numBenef,Nom,Prenom,idOffre,motDePasse,role) values('19129259','TRAPET','CORENTIN','1',md5('19129259'),1);
-#N/A
+insert into stagiaire (numBenef,Nom,Prenom,idOffre,motDePasse,role) values('20000802','DEVRED','ROMAIN','1',md5('20000802'),1);
 insert into stagiaire (numBenef,Nom,Prenom,idOffre,motDePasse,role) values('16123149','CHRISTOPHE','ALAIN','19',md5('16123149'),1);
 insert into stagiaire (numBenef,Nom,Prenom,idOffre,motDePasse,role) values('19130049','DUTAS','ALFREDO','19',md5('19130049'),1);
 insert into stagiaire (numBenef,Nom,Prenom,idOffre,motDePasse,role) values('18057086','LAJOUX','JULIEN','19',md5('18057086'),1);

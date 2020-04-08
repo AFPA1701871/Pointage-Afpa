@@ -67,7 +67,7 @@ class PointageManager
     {
         $db = DbConnect::getDb();
         $tableau = [];
-        $q = $db->prepare("SELECT * FROM pointage as p , journee as j where p.idJournee=j.idJournee and idStagiaire =".$idStagiaire." and j.idSemaine  = ".$idSemaine);
+        $q = $db->prepare("SELECT * FROM pointage as p , journee as j where p.idJournee=j.idJournee and idStagiaire =".$idStagiaire." and j.idSemaine  = ".$idSemaine. " order by p.idJournee");
         $q->execute();
         while ($donnees = $q->fetch(PDO::FETCH_ASSOC))
         {
