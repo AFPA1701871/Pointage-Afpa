@@ -125,6 +125,8 @@ p{
     flex:1;
     text-align: center;
     padding:1vw 0;
+    font-weight: bold;
+    font-size:1.6em;
         
 }
 .colonne{
@@ -140,6 +142,14 @@ p{
 .jour{
     display: flex;
 }
+.days{
+    padding:2vh 5vw;
+    border-top: 2px solid white;
+    color: var(--color-vert-fonce);
+    font-size: 1.5em;
+    font-weight: bold;
+    
+}
 .colonne-jour{
     flex:0.5;
 }
@@ -152,7 +162,7 @@ p{
      border-bottom: 2px solid var(--color-blanc);
 }
 .espv{
-    height: 15vh;
+    height: 10vh;
 }
 .rotate{
     transform: rotate(90deg);
@@ -172,8 +182,18 @@ textarea{
    flex-direction: row;
    justify-content: center;
 }
-.checkbox{
+input[type=checkbox]{
     flex:0.5;
+    display: flex;
+}
+.blocCheck{
+    display: flex;
+    width: 5vh;
+}
+
+.commente{
+    min-height:5vh ;
+    
 }
 
 /************Boutons************/
@@ -260,9 +280,10 @@ footer img{
 
 
 /***************Media Query***************/
+
 @media screen and (max-width: 1300px) {
 
-    form{
+    form.connect-form{
         width: 60vw;
     }
 
@@ -270,7 +291,7 @@ footer img{
 
 @media screen and (max-width: 700px) {
 
-    form{
+    form.connect-form{
         width: 80vw;
     }
 
@@ -278,7 +299,7 @@ footer img{
 
 @media screen and (max-width: 450px) {
 
-    form{
+    form.connect-form{
         width: 95vw;
     }
 
@@ -291,7 +312,7 @@ footer img{
         width: 70%;
     }
 
-    legend{
+    form.connect-form fieldset legend{
         font-size: 1.5em;
     }
 

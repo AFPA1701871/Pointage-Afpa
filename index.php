@@ -39,7 +39,8 @@ $routes = [
     "ChoixFormateur" => ["php/view/", "ChoixFormateur", "Formateur"],
     "ActionFormateur" => ["php/view/", "ActionFormateur", "Formateur"],
     "InterfaceAT" => ["php/view/", "InterfaceAT", "Interface AT"],
-    "exporterCSV" => ["php/view/", "ExporterCSV", "Exporter CSV"]
+    "exporterCSV" => ["php/view/", "ExporterCSV", "Exporter CSV"],
+    "ActionInterfaceStagiaire" =>["php/view/","ActionInterfaceStagiaire","ActionInterfaceStagiaire"]
 ];
 
 if (isset($_GET["action"]))

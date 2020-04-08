@@ -8,6 +8,7 @@ $nombreOffre = count(OffreManager::getListByFormateur($_SESSION['idFormateur']))
 ?>
     <div id="tableau">
         <div class="enTete">
+            <div class="colonne"><?php echo $semaineEnCours->getNumSemaine().'('.$semaineEnCours->getIdSemaine().')'; ?></div>
             <div class="colonne">Nom/prenom</div>
             <div class="colonne-jour"></div>
             <div class="colonne">Lundi <?php $lesJours[0]->getJour()?></div>
@@ -42,27 +43,29 @@ foreach ($listeStagiaires as $stagiaire)
         {
             if ($pointage[$indexPointage]->getIdJournee() == $lesJours[$i]->getIdJournee())
             {
-                // Ajouter un test sur la validation
-                // si validé -> input
-                // sinon combo
-                // POUR NABIL
-
-                //if(:
-
-                $affichage = optionComboBox($pointage[$indexPointage]->getIdPresence(), 2);
-                $commente = $pointage[$indexPointage]->getCommentaire();
-                
+                    $presence = PresenceManager::findById($pointage[$indexPointage]->getIdPresence());
+                    if ($pointage[$indexPointage]->getValidation() == 1)
+                    {
+                        $affichage = '<input disabled="disabled "type="text" value="'.$presence->getRefPresence().'">';
+                        $commente = '<input disabled="disabled" type="text" value="'.$pointage[$indexPointage]->getCommentaire().'">';
+                    }
+                    else
+                    {
+                        $affichage = optionComboBox($pointage[$indexPointage]->getIdPresence(), 2,$i);
+                        $commente = $pointage[$indexPointage]->getCommentaire();
+                    }
             }
+                
             else
             {
                 $indexPointage--;
-                $affichage = optionComboBox(null, 2);
+                $affichage = optionComboBox(null, 2,$i);
                 $commente = "";
             }
         }
         else
         {
-            $affichage = optionComboBox(null, 2);
+            $affichage = optionComboBox(null, 2,$i);
             $commente = "";
         }
         $compteur++;
@@ -73,7 +76,7 @@ foreach ($listeStagiaires as $stagiaire)
                     <div>' . $affichage . '</div>
                 </div>
                 <div class="case">
-                    <div>' . $commente . '</div>
+                    <div class="commente">' . $commente . '</div>
                 </div>';
         }
         else
@@ -90,7 +93,7 @@ foreach ($listeStagiaires as $stagiaire)
         if ($compteur == 2 && $i<9)
         {
             $compteur = 0;
-            echo '</div><!--'.$i.'--> <div class="colonne">';
+            echo '</div><div class="colonne">';
         }  
 
         $indexPointage++;
@@ -109,7 +112,7 @@ foreach ($listeStagiaires as $stagiaire)
 //var_dump($pointage);
 for ($i = 0; $i < 10; $i += 2)
 {
-    echo '<div class="jour">';
+    echo '<div class="blocCheck">';
 
     if ($longueur > $i && $pointage[$i]->getValidation() == 1)
     {

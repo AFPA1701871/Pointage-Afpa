@@ -26,8 +26,7 @@ else
                 $_SESSION['idOffre'] = $stagiaire->getIdOffre();
                 $_SESSION['nom'] = $stagiaire->getNom();
                 $_SESSION['prenom'] = $stagiaire->getPrenom();
-                $message = '<p>Bienvenue ' . $stagiaire->getPrenom() ." ". $stagiaire->getNom() . ', vous êtes maintenant connecté!</p>';
-                header("refresh:3,url=index.php?action=InterfaceStagiaire");
+                header("refresh:0,url=index.php?action=InterfaceStagiaire");
             }
             else // Acces pas OK !
             {
@@ -47,14 +46,12 @@ else
                 $_SESSION['prenom'] = $formateur->getPrenom();
                 $_SESSION['role'] = $formateur->getRole();
                 $lvl = (isset($_SESSION['role'])) ? (int) $_SESSION['role'] : 1;
-                $message = '<p>Bienvenue ' . $formateur->getPrenom() ." ". $formateur->getNom() . ', vous êtes maintenant connecté!</p>';
-
                 if ($lvl==1)
                 {
-                    header("refresh:3,url=index.php?action=ChoixFormateur");
+                    header("refresh:0,url=index.php?action=ChoixFormateur");
                 }
                 else {
-                    header("refresh:3,url=index.php?action=InterfaceAT");
+                    header("refresh:0,url=index.php?action=InterfaceAT");
                 } 
             }
             else // Acces pas OK !

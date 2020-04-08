@@ -6,5 +6,6 @@
 </footer>
 
 <script src="JS/script.js"></script>
+<script src="JS/formateur.js"></script>
 </body>
 </html>
