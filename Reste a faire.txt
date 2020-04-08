@@ -1,0 +1,20 @@
+Interface Formateur
+	Adapter le CSS au PHP
+	Faire des tests avec des pointages et des commentaires de tailles différentes
+	Insérer un formulaire, transformer les entrée en input sauf si le pointage est validé
+	Ecrire du javascript pour transformer les combo en input non modifiable quand on coche la validation
+	Mettre un message d'avertissement (en javascript) si on decoche une periode validée
+	Créer les boutons Enregistrer et Retour et les rendre opérationnels
+
+Interface Stagiaire
+	Adapter le CSS au PHP (MobileFirst)
+	Faire des tests avec des pointages et des commentaires de tailles différentes
+	Insérer un formulaire, transformer les entrée en input sauf si le pointage est validé
+	Créer le bouton Enregistrer et le rendre opérationnel
+	
+Interface AT
+	Donner la possibilité de faire une sélection multiple sur les offres pour obtenir un fichier avec plusieurs oglets
+	Appliquer le CSS 
+
+Divers
+	Enrichir le pied de page avec un nom d'équipe ou un logo
