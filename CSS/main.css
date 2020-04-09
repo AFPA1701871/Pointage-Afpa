@@ -110,14 +110,7 @@ p{
     text-align: center;
     
 }
-.motDePasse{
-    position: relative;
-}
-#oeil{  
-    position: absolute;
-    right:5vw;
-    cursor: pointer;
-}
+
 /***************Tableau***************/
 #tableau{
     display: flex;
@@ -133,14 +126,32 @@ p{
     text-align: center;
     padding:1vw 0;
     font-weight: bold;
-    font-size:1.6em;
+    font-size:1.2em;
+    border-bottom: 4px solid var(--color-blanc);
         
+}
+.enTeteSemaine{
+    display: flex;
+    background-color: var(--color-bleu-fonce);
+    flex:1;
+    justify-content: center;
+    text-align: center;
+    padding:1vw 0;
+    font-weight: bold;
+    font-size:1.4em;
+    border-bottom:var(--color-bleu-clair) 2px solid;
+
 }
 .colonne{
     flex: 1; 
     display: flex;
     flex-direction: column;
     
+}
+
+.stagiaire{
+font-weight: bold;
+padding-top: 10vh;
 }
 .row{
     flex: 1; 
@@ -159,6 +170,7 @@ p{
 }
 .colonne-jour{
     flex:0.5;
+    padding-top: 7vh;
 }
 .bloc{
     display: flex;
@@ -166,10 +178,14 @@ p{
     text-align: center;
     align-items: center;
     color:var(--color-vert-fonce);
-     border-bottom: 2px solid var(--color-blanc);
+     border-bottom: 4px solid var(--color-blanc);
+}
+
+.bloc2{
+    align-items: flex-start;
 }
 .espv{
-    height: 10vh;
+    height: 12vh;
 }
 .rotate{
     transform: rotate(90deg);
@@ -190,22 +206,39 @@ textarea{
    justify-content: center;
 }
 input[type=checkbox]{
-    flex:0.5;
-    display: flex;
+    width: 20px;
+    height: 20px;
+  
 }
 .blocCheck{
     display: flex;
-    width: 5vh;
+}
+
+.colonneCheck{
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.messageCheck{
+    color:red;
+    padding-bottom:1vh ;
+    text-align: center;
+
 }
 
 .commente{
     min-height:5vh ;
-    
 }
-
+textarea{
+    overflow: scroll;
+    resize: none;
+    overflow-x: hidden;
+}
 /************Boutons************/
 input,
-select {
+select,textarea {
     width: 100%;
     font-size: 1em;
     padding: 12px 20px;
@@ -221,6 +254,8 @@ select {
     justify-content: center;
 
 }
+
+
 
 input[type=submit]{
     width: 50%;
@@ -262,6 +297,7 @@ input[type=submit]:hover ,button:hover{
 footer{
     position: fixed;
     bottom :0;
+    left: 0;
     height: 10vh;
     width: 100%;
     background-color: var(--color-vert-afpa);

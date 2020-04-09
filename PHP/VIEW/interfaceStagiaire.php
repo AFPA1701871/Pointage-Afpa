@@ -35,12 +35,12 @@ for ($i = 0; $i < 10; $i++)
             if ($pointage[$indexPointage]->getValidation() == 1)
             {
                 $affichage = '<input disabled="disabled" id="combo'.$i.'" name="combo'.$i.'" type="text" value="' . $presence->getRefPresence() . '">';
-                $commente = '<input disabled="disabled" id="commentaire'.$i.'" name="commentaire'.$i.'" type="text" value="' . $pointage[$indexPointage]->getCommentaire() . '">';
+                $commente = '<input disabled="disabled" id="commentaire'.$i.'" name="commentaire'.$i.'" type="text" >' . $pointage[$indexPointage]->getCommentaire() . '></textarea>';
             }
             else
             {
                 $affichage = optionComboBox($pointage[$indexPointage]->getIdPresence(), 1,$i);
-                $commente = '<input type="text" id="commentaire'.$i.'" name="commentaire'.$i.'" value="'.$pointage[$indexPointage]->getCommentaire().'">';
+                $commente = '<textarea class="commente" id="commentaire'.$i.'" name="commentaire'.$i.'" >'.$pointage[$indexPointage]->getCommentaire().'</textarea>';
             }
         }
         else
@@ -48,33 +48,33 @@ for ($i = 0; $i < 10; $i++)
             $inputIdpointage = '<input id="idPointage'.$i.'" name="idPointage'.$i.'" value = "null" type="hidden">';
             $indexPointage--;
             $affichage = optionComboBox(null, 1,$i);
-            $commente = '<input type="text" name="commentaire'.$i.'" value="" placeholder="commentaire éventuel">';
+            $commente = '<textarea class="commente" id="commentaire'.$i.'" name="commentaire'.$i.'"  placeholder="commentaire éventuel"></textarea>';
         }
     }
     else
     {
         $inputIdpointage = '<input id="idPointage'.$i.'" name="idPointage'.$i.'" value = "null" type="hidden">';
         $affichage = optionComboBox(null, 1,$i);
-        $commente = '<input type="text" name="commentaire'.$i.'" value="" placeholder="commentaire éventuel">';
+        $commente = '<textarea class="commente" id="commentaire'.$i.'" name="commentaire'.$i.'"  placeholder="commentaire éventuel"></textarea>';
     }
     $compteur++;
 
     switch ($i)
     {
         case 0:
-            echo '    <div class="days">LUNDI ' . $lesJours[0]->getJour() . '</div>';
+            echo '    <div class="days">LUNDI ' . date('d-m',strtotime($lesJours[0]->getJour())) . '</div>';
             break;
         case 2:
-            echo '    </div><div class="days">MARDI ' . $lesJours[2]->getJour() . '</div>';
+            echo '    </div><div class="days">MARDI ' . date('d-m',strtotime($lesJours[2]->getJour())) . '</div>';
             break;
         case 4:
-            echo '    </div><div class="days">MERCREDI ' . $lesJours[4]->getJour() . '</div>';
+            echo '    </div><div class="days">MERCREDI ' . date('d-m',strtotime($lesJours[4]->getJour())) . '</div>';
             break;
         case 6:
-            echo '    </div><div class="days">JEUDI ' . $lesJours[6]->getJour() . '</div>';
+            echo '    </div><div class="days">JEUDI ' . date('d-m',strtotime($lesJours[6]->getJour())) . '</div>';
             break;
         case 8:
-            echo '    </div><div class="days">VENDREDI ' . $lesJours[8]->getJour() . '</div>';
+            echo '    </div><div class="days">VENDREDI ' .date('d-m',strtotime( $lesJours[8]->getJour())) . '</div>';
             break;
     }
     if ($i % 2 == 0)

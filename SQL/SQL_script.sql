@@ -93,8 +93,8 @@ CREATE TABLE IF NOT EXISTS pointage (
         idStagiaire Int NOT NULL ,
         idJournee   Int NOT NULL ,
         idPresence  Int NOT NULL ,
-        commentaire Varchar (50) ,
-        validation  Varchar (50)
+        commentaire Varchar(200) ,
+        validation  int default 0
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 #------------------------------------------------------------
