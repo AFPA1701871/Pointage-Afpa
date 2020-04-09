@@ -10,7 +10,7 @@ $stagiaire = StagiaireManager::findById($idStagiaire);
 
 <div id="tableau">
 
-        <div class="en-tete">
+        <div class="enTete">
             <div class="colonne">SEMAINE n°<?php echo $semaineEnCours->getNumSemaine() ?></div>
             </div>
 
@@ -34,13 +34,13 @@ for ($i = 0; $i < 10; $i++)
             $presence = PresenceManager::findById($pointage[$indexPointage]->getIdPresence());
             if ($pointage[$indexPointage]->getValidation() == 1)
             {
-                $affichage = '<input disabled="disabled name="combo'.$i.'" type="text" value="' . $presence->getRefPresence() . '">';
-                $commente = '<input disabled="disabled" name="commentaire'.$i.'" type="text" value="' . $pointage[$indexPointage]->getCommentaire() . '">';
+                $affichage = '<input disabled="disabled" id="combo'.$i.'" name="combo'.$i.'" type="text" value="' . $presence->getRefPresence() . '">';
+                $commente = '<input disabled="disabled" id="commentaire'.$i.'" name="commentaire'.$i.'" type="text" value="' . $pointage[$indexPointage]->getCommentaire() . '">';
             }
             else
             {
                 $affichage = optionComboBox($pointage[$indexPointage]->getIdPresence(), 1,$i);
-                $commente = '<input type="text" name="commentaire'.$i.'" value="'.$pointage[$indexPointage]->getCommentaire().'">';
+                $commente = '<input type="text" id="commentaire'.$i.'" name="commentaire'.$i.'" value="'.$pointage[$indexPointage]->getCommentaire().'">';
             }
         }
         else
@@ -83,7 +83,8 @@ for ($i = 0; $i < 10; $i++)
     }
     else
     {
-        echo '  <div class="case ">Ap Midi</div>';
+        if ($i < 9)
+        echo '  <div class="case ">Après Midi</div>';
     }
     if ($i < 9)
     { //Tous les jours 

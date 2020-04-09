@@ -10,7 +10,7 @@
 
 function optionComboBox($code, $ref,$suffixeNom)
 {
-    $select = '<select name="combo'.$suffixeNom.'" >';
+    $select = '<select id="combo'.$suffixeNom.'" name="combo'.$suffixeNom.'" >';
     $liste = PresenceManager::getList();
     if ($code == null)
     { // si le code est null, on ne mets pas de choix par défaut avec valeur

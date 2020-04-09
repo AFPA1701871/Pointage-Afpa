@@ -18,7 +18,7 @@
                 <div class="ligne">
                     <input type="text" name="identifiant" id="identifiant" maxlength="50"
                         placeholder="Matricule ou Numéro bénéficiaire" required>
-                    <i class="fas fa-question-circle" title="test"></i>
+                    <i class="fas fa-question-circle" title="Matricule ou Numéro bénéficiaire"></i>
                 </div>
             </div>
 
@@ -27,7 +27,7 @@
                 <div class="ligne motDePasse">
                     <input type="password" id="motDePasse" name="motDePasse" placeholder="***********" required>
                     <div id="oeil"><i class="fas fa-eye"></i></div>
-                    <i class="fas fa-question-circle" title="test"></i>
+                    <i class="fas fa-question-circle" title="Matricule ou Numéro bénéficiaire"></i>
                 </div>
             </div>
 

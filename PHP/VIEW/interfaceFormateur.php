@@ -7,15 +7,16 @@ $listeStagiaires = StagiaireManager::getStagiairesParOffres($idOffre);
 $nombreOffre = count(OffreManager::getListByFormateur($_SESSION['idFormateur'])); // on compte le nombre d'offres du.de la formateur.rice connecté.e
 ?>
     <div id="tableau">
+        <div class="colonne"><?php echo $semaineEnCours->getNumSemaine().'('.$semaineEnCours->getIdSemaine().')'; ?></div>
+            
         <div class="enTete">
-            <div class="colonne"><?php echo $semaineEnCours->getNumSemaine().'('.$semaineEnCours->getIdSemaine().')'; ?></div>
             <div class="colonne">Nom/prenom</div>
             <div class="colonne-jour"></div>
-            <div class="colonne">Lundi <?php $lesJours[0]->getJour()?></div>
-            <div class="colonne">Mardi <?php $lesJours[2]->getJour()?></div>
-            <div class="colonne">Mercredi <?php $lesJours[4]->getJour()?></div>
-            <div class="colonne">Jeudi <?php $lesJours[6]->getJour()?></div>
-            <div class="colonne">Vendredi <?php $lesJours[8]->getJour()?></div>
+            <div class="colonne">Lundi <?php echo $lesJours[0]->getJour()?></div>
+            <div class="colonne">Mardi <?php echo $lesJours[2]->getJour()?></div>
+            <div class="colonne">Mercredi <?php echo $lesJours[4]->getJour()?></div>
+            <div class="colonne">Jeudi <?php echo $lesJours[6]->getJour()?></div>
+            <div class="colonne">Vendredi <?php echo $lesJours[8]->getJour()?></div>
         </div>
 <?php
 echo  '<form action="index.php?action="ActionInterfaceFormateur" method="POST">';

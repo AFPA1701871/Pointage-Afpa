@@ -7,5 +7,6 @@
 
 <script src="JS/script.js"></script>
 <script src="JS/formateur.js"></script>
+<script src="JS/selectionOffresAT.js"></script>
 </body>
 </html>

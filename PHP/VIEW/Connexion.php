@@ -8,7 +8,7 @@ if (!isset($_POST['identifiant'])) // On est dans la page de formulaire
 else 
 { // Le formulaire a été validé
     $message = '';
-    if (empty($_POST['identifiant']) || empty($_POST['motDePasse'])) // Oublie d'un champ         
+    if (empty(trim($_POST['identifiant'])) || empty(trim($_POST['motDePasse']))) // Oublie d'un champ         
     {
         $message = '<p>une erreur s\'est produite pendant votre identification.
                        Vous devez remplir tous les champs</p>
@@ -19,7 +19,7 @@ else
         if ($_POST['choix']=="stagiaire")
         {
             $stagiaire = StagiaireManager::getByNumBenef($_POST['identifiant']);
-            if ($stagiaire->getMotDePasse() == md5($_POST['motDePasse'])) // Acces OK !
+            if ($stagiaire->getMotDePasse() == md5(trim($_POST['motDePasse']))) // Acces OK !
             {
                 $_SESSION['identifiant'] = $stagiaire->getNumBenef();
                 $_SESSION['idStagiaire'] = $stagiaire->getIdStagiaire();
@@ -38,7 +38,7 @@ else
         else
         {
             $formateur = FormateurManager::getByMatricule($_POST['identifiant']);
-            if ($formateur->getMotDePasse() == md5($_POST['motDePasse'])) // Acces OK !
+            if ($formateur->getMotDePasse() == md5(trim($_POST['motDePasse']))) // Acces OK !
             {
                 $_SESSION['idFormateur'] = $formateur->getIdFormateur();
                 $_SESSION['matricule'] = $formateur->getMatricule();

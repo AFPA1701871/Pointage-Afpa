@@ -1,36 +1,37 @@
-body{
-    font-family: Arial, Helvetica, sans-serif;
+#interfaceAT{
+    padding-bottom: 12vh;
 }
 
-.listePointages{
+#interfaceAT .listePointages{
     display: flex;
     flex-direction: column;
-    margin: 4vh 2vw;
     border: 1px solid black;
     width: 40vw;
     justify-content: center;
     align-items: center;
 }
 
-.entete{
-    background-color: burlywood;
+#interfaceAT .entete{
+    background-color: #0070ca;
+    color: white;
     border-bottom: 1px solid black;;
 }
 
-.ligne{
+#interfaceAT .ligne{
     display: flex;
     flex-direction: row;
     width: 100%;
 }
 
-.ligne div{
+#interfaceAT .ligne div{
     padding: 1vh 1vw;
     flex: 1;
     text-align: center;
 }
 
-.bouton{
-    color: black;
+#interfaceAT .bouton, input[type="submit"]{
+    cursor: pointer;
+    color: white;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -39,6 +40,48 @@ body{
     max-width: 10vw;
     margin: 1vh 1vw;
     padding: 1vh 1vw;
-    background-color: burlywood;
+    background-color: #0070ca;
     border: 1px solid black;
+}
+
+#interfaceAT #listeOffres{
+    display: flex;
+    justify-content: center;
+    overflow: auto;
+    max-height: 20vh;
+    width: 15vw;
+    padding: 0;
+}
+
+#interfaceAT #selectAllOffres{
+    user-select: none;
+    cursor: pointer;
+}
+
+#interfaceAT .offre{
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    padding: 0.3vh 0.1vw;
+}
+
+#interfaceAT .offre input{
+    margin-right: 2vw;
+}
+
+#interfaceAT .offre:hover{
+    background-color: #01b5fc;
+    color: white;
+}
+
+#interfaceAT .offre.checked:not(:hover){
+    background-color: #0070ca;
+    color: white;
+}
+
+#interfaceAT .pointagesOffre{
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    padding: 4vh 2vw;
 }
