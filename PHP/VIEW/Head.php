@@ -8,6 +8,6 @@
     <link rel="stylesheet" href="CSS/phone.css">
     <link rel="stylesheet" href="CSS/stylesAT.css">
     <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed&display=swap" rel="stylesheet">
-    <script src="https://kit.fontawesome.com/13bc1841db.js" crossorigin="anonymous"></script>
-    <meta name ="viewport" content ="width-device-width,initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="CSS/fontawesome/css/all.css">
+     <meta name ="viewport" content ="width-device-width,initial-scale=1">
 </head>
