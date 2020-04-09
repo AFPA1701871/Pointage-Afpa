@@ -7,13 +7,12 @@ echo
 
     '<form action="" method="POST">
 
-    <input type="hidden" name="action" value="' . $_GET['action'] . '">
+    <input type="hidden" name="action" value="' . $_GET['action'] . '">';
 
-    <p><label for="numOffre">Numero d\'Offre: </label>';
 
-echo '<p id="selectAllOffres" class="bouton">Tout selectionner</p>';
 
-echo '<fieldset id="listeOffres">';
+
+echo '<div class="centrer"><fieldset id="listeOffres"><legend>Numero d\'Offre:</legend><div class="numOffres">';
 $offres = OffreManager::getList();
 foreach ($offres as $offre) {
 
@@ -31,13 +30,14 @@ foreach ($offres as $offre) {
     echo '<span class="offre '.$checked.'"><input class="checkboxOffre" type="checkbox" name="numOffre[]" ' . $checked . ' value="' . $offre->getNumOffre() . '">' . $offre->getNumOffre() . '</span>';
 }
 
-echo '</fieldset>';
+echo '</div></fieldset></div>';
+echo '<div class=centrer><p id="selectAllOffres" class="btna">Tout selectionner</p></div>';
 
-echo '</p>
 
-    <p><label for="semaine">Numero de semaine: </label>
 
-    <select name="semaine">';
+echo'    <p><label for="semaine">Numero de semaine : </label>
+
+    <select class="numSemaines" name="semaine">';
 
 //Affichage des options de selection des semaines
 $semaines = SemaineManager::getList();
@@ -71,7 +71,7 @@ foreach ($semaines as $semaine) {
 
 echo '</select></p>
 
-    <p><input type="submit" value="Afficher"></p>
+    <p><div class="centrer"> <input type="submit" value="Afficher"></div></p>
 
 </form>';
 
@@ -88,7 +88,7 @@ if (isset($_POST["numOffre"])) {
     //Bouton vers l'export au format csv
     echo '<form action="index.php?action=exporterCSV&mode=multiple&idSemaine='.$idSemaine.'" method="POST">';
     
-        echo '<input type="submit" value="Tout Exporter CSV">';
+        echo '<div class="centrer"><input type="submit" value="Tout Exporter CSV"></div>';
     
 
     foreach ($offres as $offre) {
@@ -116,7 +116,7 @@ if (isset($_POST["numOffre"])) {
 
             //Parcours et affichage du tableau des pointages
 
-            echo '<div class="pointagesOffre">
+            echo '<div class="pointagesOffre centrer">
 
             <div class="listePointages">
 
@@ -163,7 +163,7 @@ if (isset($_POST["numOffre"])) {
             echo '</div>';
 
             //Bouton vers l'export au format csv
-            echo '<a class="bouton" href="index.php?action=exporterCSV&mode=unique&idOffre=' . $idOffres[$offre] . '&idSemaine=' . $idSemaine . '">Exporter CSV</a>
+            echo '<a class="btna" href="index.php?action=exporterCSV&mode=unique&idOffre=' . $idOffres[$offre] . '&idSemaine=' . $idSemaine . '">Exporter CSV</a>
 
             </div>';
 

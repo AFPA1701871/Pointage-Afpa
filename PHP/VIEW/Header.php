@@ -20,13 +20,15 @@ $action = (isset($_GET['action'])) ? $_GET['action'] : '';
 
         <div class="colonne centrer" id="bienvenue">
 
-            <?php                 
-            if ($action != "connexion"){
-                if ($identifiant != "" || $matricule != "") {
-                echo '<div class="centrer">' . $nom2 . ' '.$prenom . '</div>
-                <div class="centrer"> <a href="index.php?action=deconnexion">Déconnecter</a> </div>';
-                } 
-            }?>
+            <?php
+if ($action != "connexion")
+{
+    if ($identifiant != "" || $matricule != "")
+    {
+        echo '<div class="centrer">' . $nom2 . ' ' . $prenom . '</div>
+                <div class="centrer"> <a href="index.php?action=deconnexion">Se déconnecter</a> </div>';
+    }
+}?>
         </div>
 
     </header>

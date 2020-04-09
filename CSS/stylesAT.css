@@ -7,8 +7,10 @@
     flex-direction: column;
     border: 1px solid black;
     width: 40vw;
-    justify-content: center;
     align-items: center;
+    max-height: 30vh;
+    overflow: auto;
+    
 }
 
 #interfaceAT .entete{
@@ -21,6 +23,7 @@
     display: flex;
     flex-direction: row;
     width: 100%;
+  
 }
 
 #interfaceAT .ligne div{
@@ -29,28 +32,28 @@
     text-align: center;
 }
 
-#interfaceAT .bouton, input[type="submit"]{
-    cursor: pointer;
-    color: white;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    text-decoration: none;
-    max-width: 10vw;
-    margin: 1vh 1vw;
-    padding: 1vh 1vw;
-    background-color: #0070ca;
-    border: 1px solid black;
-}
 
 #interfaceAT #listeOffres{
     display: flex;
     justify-content: center;
+    margin-top: 5vh;
+    height: 30vh;
+    width: 30vw;
+    padding:0;
+}
+
+.numOffres{
     overflow: auto;
-    max-height: 20vh;
-    width: 15vw;
-    padding: 0;
+    padding: 1vw;
+    height: 22vh;
+}
+
+.numSemaines{
+    width: 30vw;
+}
+
+h3{
+    text-align: center;
 }
 
 #interfaceAT #selectAllOffres{
@@ -81,7 +84,9 @@
 
 #interfaceAT .pointagesOffre{
     display: flex;
-    flex-direction: row;
-    align-items: flex-start;
+    flex-direction: column;
+    align-items:center;
     padding: 4vh 2vw;
+   
 }
+

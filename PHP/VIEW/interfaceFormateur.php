@@ -117,8 +117,8 @@ foreach ($listeStagiaires as $stagiaire)
 //var_dump($pointage);
 
 echo '<div class="blocCheck">
-<div class="colonne valide">Cocher pour valider la journée</div>
-<div class="colonne-jour"></div>';
+<div class="colonne valide">Cocher pour valider la journée</div>';
+
 
 
 for ($i = 0; $i < 10; $i += 2)

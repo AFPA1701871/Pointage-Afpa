@@ -34,8 +34,8 @@ for ($i = 0; $i < 10; $i++)
             $presence = PresenceManager::findById($pointage[$indexPointage]->getIdPresence());
             if ($pointage[$indexPointage]->getValidation() == 1)
             {
-                $affichage = '<input disabled="disabled" id="combo'.$i.'" name="combo'.$i.'" type="text" value="' . $presence->getRefPresence() . '">';
-                $commente = '<input disabled="disabled" id="commentaire'.$i.'" name="commentaire'.$i.'" type="text" >' . $pointage[$indexPointage]->getCommentaire() . '></textarea>';
+                $affichage = '<input readonly id="combo'.$i.'" name="combo'.$i.'" type="text" value="' . $presence->getRefPresence() . '">';
+                $commente = '<input readonly id="commentaire'.$i.'" name="commentaire'.$i.'" type="text" >' . $pointage[$indexPointage]->getCommentaire() . '</textarea>';
             }
             else
             {

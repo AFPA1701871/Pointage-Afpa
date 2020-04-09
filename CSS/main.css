@@ -151,7 +151,7 @@ p{
 
 .stagiaire{
 font-weight: bold;
-padding-top: 10vh;
+padding-top: 12vh;
 }
 .row{
     flex: 1; 
@@ -213,7 +213,14 @@ input[type=checkbox]{
 .blocCheck{
     display: flex;
 }
-
+.valide{
+    flex:1.5;
+    text-align: center;
+    color: var(--color-blanc);
+    font-weight: bold;
+    padding: 1vh 0;
+    background-color: var(--color-vert-afpa);
+}
 .colonneCheck{
     flex: 1;
     display: flex;
@@ -244,7 +251,7 @@ select,textarea {
     padding: 12px 20px;
     margin: 8px 0;
     display: inline-block;
-    border: 1px solid #ccc;
+    border: 2px solid #ccc;
     border-radius: 4px;
     box-sizing: border-box;
 }

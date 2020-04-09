@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title><?php echo (isset($titre)) ? $titre:"Pointage AFPA"; ?></title>
+    <title><?php echo "Pointage AFPA"; ?></title>
     <link rel="stylesheet" href="CSS/main.css">
     <link rel="stylesheet" href="CSS/phone.css">
     <link rel="stylesheet" href="CSS/stylesAT.css">
