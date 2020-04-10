@@ -1,8 +1,7 @@
 <?php
-
 if (!isset($_POST['identifiant'])) // On est dans la page de formulaire
 {
-    require 'Php/View/HtmlConnexion.php'; // On affiche le formulaire
+    require 'PHP/VIEW/HtmlConnexion.php'; // On affiche le formulaire
 
 } 
 else 

@@ -39,7 +39,7 @@ for ($i = 0; $i < 10; $i++)
             }
             else
             {
-                $affichage = optionComboBox($pointage[$indexPointage]->getIdPresence(), 1,$i);
+                $affichage = optionComboBox($pointage[$indexPointage]->getIdPresence(), 1,"combo".$i,"","");
                 $commente = '<textarea class="commente" id="commentaire'.$i.'" name="commentaire'.$i.'" >'.$pointage[$indexPointage]->getCommentaire().'</textarea>';
             }
         }
@@ -47,14 +47,14 @@ for ($i = 0; $i < 10; $i++)
         {
             $inputIdpointage = '<input id="idPointage'.$i.'" name="idPointage'.$i.'" value = "null" type="hidden">';
             $indexPointage--;
-            $affichage = optionComboBox(null, 1,$i);
+            $affichage = optionComboBox(null, 1,"combo".$i,"","");
             $commente = '<textarea class="commente" id="commentaire'.$i.'" name="commentaire'.$i.'"  placeholder="commentaire éventuel"></textarea>';
         }
     }
     else
     {
         $inputIdpointage = '<input id="idPointage'.$i.'" name="idPointage'.$i.'" value = "null" type="hidden">';
-        $affichage = optionComboBox(null, 1,$i);
+        $affichage = optionComboBox(null, 1,"combo".$i,"","");
         $commente = '<textarea class="commente" id="commentaire'.$i.'" name="commentaire'.$i.'"  placeholder="commentaire éventuel"></textarea>';
     }
     $compteur++;

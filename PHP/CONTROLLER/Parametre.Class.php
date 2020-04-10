@@ -1,6 +1,7 @@
 <?php
 Class Parametre
 {
+    
     static private $_host;
     static private $_port;
     static private $_dbName;

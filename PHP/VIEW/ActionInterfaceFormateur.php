@@ -1,5 +1,4 @@
 <?php
-
 $idOffre = $_SESSION['idOffre'];
 $listeStagiaires = StagiaireManager::getStagiairesParOffres($idOffre);
 
@@ -31,8 +30,18 @@ for ($i=0; $i<9; $i++)
             $idPoint = $_POST["idPointage".$i."s".$idStagiaireEnCours];
         }
 
+        if (isset($_POST["incombo".$i.'s'.$idStagiaireEnCours]))
+        {   //si un input existe, je prend la presence de l'input
+            $idPresence = $_POST["incombo".$i.'s'.$idStagiaireEnCours];
+            
+        }
+        else{
+            //je prend la presence de la combo
+            $idPresence = $_POST["combo".$i.'s'.$idStagiaireEnCours];
+        }
+
         $p = new Pointage(["idPointage"=>$idPoint, "idStagiaire"=>$idStagiaireEnCours, "idJournee"=>$_POST["idJournee".$i],
-        "idPresence"=>$_POST['combo'.$i.'s'.$idStagiaireEnCours], "idSemaine"=>$idSemaineEnCours,
+        "idPresence"=>$idPresence, "idSemaine"=>$idSemaineEnCours,
         "commentaire"=>$_POST['commentaire'.$i.'s'.$idStagiaireEnCours], "validation"=>$validation ]);
         
         $tabPointage[$idStagiaireEnCours][] = $p; // tableau à 2 dimensions permettant de stocker tous les pointages de tous les stagiaires

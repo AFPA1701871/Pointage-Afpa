@@ -78,6 +78,21 @@ class PointageManager
         }
         return $tableau;
     }
+    public static function getListvalidesByStagiaire($idStagiaire,$idSemaine)
+    {
+        $db = DbConnect::getDb();
+        $tableau = [];
+        $q = $db->prepare("SELECT * FROM pointage as p , journee as j where p.idJournee=j.idJournee and idStagiaire =".$idStagiaire." and j.idSemaine  = ".$idSemaine. " and validation =1 order by p.idJournee");
+        $q->execute();
+        while ($donnees = $q->fetch(PDO::FETCH_ASSOC))
+        {
+            if ($donnees != false)
+            {
+                $tableau[] = new Pointage($donnees);
+            }
+        }
+        return $tableau;
+    }
 
     /**
      * majPointage : met à jour le pointage d'un stagiaire pour une semaine donnée

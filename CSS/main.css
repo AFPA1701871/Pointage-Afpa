@@ -248,12 +248,13 @@ input,
 select,textarea {
     width: 100%;
     font-size: 1em;
-    padding: 12px 20px;
+    padding: 12px 15px;
     margin: 8px 0;
     display: inline-block;
     border: 2px solid #ccc;
     border-radius: 4px;
     box-sizing: border-box;
+    font-family: Roboto,sans-serif;
 }
 
 .centrer{
@@ -262,7 +263,9 @@ select,textarea {
 
 }
 
-
+input:read-only,textarea:read-only{
+    opacity: 0.4;
+}
 
 input[type=submit]{
     width: 50%;
@@ -333,7 +336,7 @@ footer img{
 }
 #oeil{  
     position: absolute;
-    right:5vw;
+    right:3vw;
     cursor: pointer;
 }
 
@@ -347,6 +350,16 @@ footer img{
 
 }
 
+@media screen and (max-width: 1100px) {
+
+   #oeil{
+       right: 5vw;
+   }
+
+
+}
+
+
 @media screen and (max-width: 700px) {
 
     form.connect-form{
@@ -354,6 +367,15 @@ footer img{
     }
 
 }
+
+@media screen and (max-width: 600px) {
+
+    #oeil{
+        right: 7vw;
+    }
+ 
+ 
+ }
 
 @media screen and (max-width: 450px) {
 
@@ -374,4 +396,7 @@ footer img{
         font-size: 1.5em;
     }
 
+}
+.invisible{
+    display: none;
 }

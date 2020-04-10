@@ -8,13 +8,13 @@
  * @return void
  */
 
-function optionComboBox($code, $ref,$suffixeNom)
+function optionComboBox($code, $ref,$nom, $attribut,$cache)
 {
-    $select = '<select id="combo'.$suffixeNom.'" name="combo'.$suffixeNom.'" >';
+    $select = '<select id="'.$nom.'" name="'.$nom.'" ' . $attribut.' '.$cache.' >';
     $liste = PresenceManager::getList();
-    if ($code == null)
+    if ($code == null || $code== 0 )
     { // si le code est null, on ne mets pas de choix par défaut avec valeur
-        $select .= '<option value="" SELECTED>Choisir situation</option>';
+        $select .= '<option value="" >Choisir situation</option>';
     }
     foreach ($liste as $elt)
     {
