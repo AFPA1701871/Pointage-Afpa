@@ -17,8 +17,8 @@
                 <label for="identifiant">Identifiant :</label>
                 <div class="ligne">
                     <input type="text" name="identifiant" id="identifiant" maxlength="50"
-                        placeholder="Matricule ou Numéro bénéficiaire" required>
-                    <i class="fas fa-question-circle" title="Matricule ou Numéro bénéficiaire"></i>
+                        placeholder="Matricule" required>
+                    <i class="fas fa-question-circle" title="Matricule"></i>
                 </div>
             </div>
 

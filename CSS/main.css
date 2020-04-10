@@ -327,7 +327,15 @@ footer img{
     padding-right: 2vw;
     max-height: 10vh;
 }
-
+/***************connexion***************/
+.motDePasse{
+    position: relative;
+}
+#oeil{  
+    position: absolute;
+    right:5vw;
+    cursor: pointer;
+}
 
 /***************Media Query***************/
 
