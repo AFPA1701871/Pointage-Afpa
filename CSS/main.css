@@ -83,7 +83,7 @@ fieldset{
     padding:1vw 5vw;
 }
 legend{
-    font-size: 2em;
+    font-size: 1.5em;
     color:var(--color-bleu-fonce);
     padding:0 2vw;
 }

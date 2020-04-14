@@ -132,9 +132,9 @@ DROP VIEW IF EXISTS pointages_par_semaines;
 CREATE VIEW pointages_par_semaines AS SELECT
     p.idPointage, p.idStagiaire,p.idPresence, j.demiJournee, j.jour, j.idJournee, s.numSemaine, s.idSemaine, s.mois, p.commentaire, p.validation
 FROM
-    pointageAfpa.pointage AS p,
-    pointageAfpa.journee AS j,
-    pointageAfpa.semaine AS s
+    pointage AS p,
+    journee AS j,
+    semaine AS s
 WHERE
     p.idJournee = j.idJournee AND j.idSemaine = s.idSemaine;
 
@@ -142,8 +142,8 @@ DROP VIEW IF EXISTS stagiaires_par_offres;
 CREATE VIEW  stagiaires_par_offres AS SELECT
     s.idStagiaire, s.nom, s.prenom, s.numBenef, o.idOffre, o.numOffre, f.idFormation, f.codeFormation, f.libelleFormation
 FROM
-    pointageAfpa.stagiaire AS s,
-    pointageAfpa.offre AS o,
-    pointageAfpa.formation AS f
+    stagiaire AS s,
+    offre AS o,
+    formation AS f
 WHERE
     s.idOffre = o.idOffre AND o.idFormation = f.idFormation;

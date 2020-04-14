@@ -1,165 +1,103 @@
-#interfaceAT{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+#interfaceAT {
+    padding-bottom: 12vh;
 }
 
-#interfaceAT form{ 
+#interfaceAT .listePointages {
     display: flex;
     flex-direction: column;
+    border: 1px solid black;
     align-items: center;
+    max-height: 30vh;
+    overflow: auto;
+    max-width: 80%;
 }
 
-#interfaceAT #selectionForm{ 
-    padding: 3vh 0;
+#interfaceAT .entete {
+    background-color: #0070ca;
+    color: white;
+    border-bottom: 1px solid black;
+    ;
+}
+
+#interfaceAT .ligne {
+    display: flex;
     flex-direction: row;
+    width: 100%;
+
+}
+
+#interfaceAT .ligne div {
+    padding: 1vh 1vw;
+    flex: 1;
     justify-content: center;
-    width: 100%;
-    height: auto;
-    margin-bottom: 5vh;
 }
-
-#interfaceAT #selectionForm fieldset{
-    background-color: white;
-    width: 100%;
+#interfaceAT .bloc{
+min-width: 5vw;
 }
-
-#interfaceAT .elementForm{
+#interfaceAT #listeOffres {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin: 0 2vw;
+    justify-content: center;
+    margin-top: 5vh;
+    height: 30vh;
+    width: 30vw;
+    padding: 0;
+    overflow: hidden;
+}
+
+#interfaceAT #selectionForm {
+    border: 1px solid black;
+    border-radius: 5vw;
+    margin: 5vw;
+}
+
+.numOffres {
+    overflow: auto;
+    padding: 1vw 1vw 3vw 2vw;
+    height: 20vh;
+}
+
+.numSemaines {
     width: 30vw;
 }
 
-#interfaceAT .elementForm .centrer{
-    width: 100%;
-}
-
-#interfaceAT .listePointages{
-    display: flex;
-    flex-direction: column;
-    box-shadow: 5px 5px 5px rgba(0,0,0,0.3);
-    width: 50vw;
-    justify-content: center;
-    align-items: center;
-}
-
-
-#interfaceAT .ligne{
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-    background-color: lightblue;
-    align-items: stretch;
-    height: 8vh;
-}
-
-#interfaceAT .ligne:nth-child(even){
-    background-color: lightskyblue;
-}
-
-#interfaceAT .entete{
-    background-color: var(--color-bleu-fonce);
-    color: white;
-    overflow-y: scroll;
-}
-
-#interfaceAT .entete::-webkit-scrollbar{
-    opacity: 0;
-}
-
-#interfaceAT .ligne .bloc{
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
-    justify-content: center;
-    flex: 1;
+h3 {
     text-align: center;
-    border-right: 1px solid grey;
-    border-bottom: 2px solid grey;
 }
 
-#interfaceAT .entete .bloc{
-    color: white;
-    border-right: unset;
-}
-
-#interfaceAT .corpsTable{
-    width: 100%;
-    overflow-y: scroll;
-    max-height: 40vh;
-}
-
-#interfaceAT .ligne .bloc .demiJournee{
-    height: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-#interfaceAT .ligne .bloc .demiJournee:first-child{
-    border-bottom: 1px solid white;
-}
-
-#interfaceAT .bouton, input[type="submit"]{
-    cursor: pointer;
-    color: white;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    text-decoration: none;
-    max-width: 10vw;
-    margin: 1vh 1vw;
-    padding: 1vh 1vw;
-    background-color:var(--color-bleu-fonce);
-    border: 1px solid black;
-}
-
-#interfaceAT #listeOffres{
-    display: flex;
-    justify-content: center;
-    max-height: 20vh;
-    width: 15vw;
-    padding: 0;
-}
-
-#interfaceAT .numOffres{
-    height: 14vh;
-    overflow: auto;
-}
-
-
-#interfaceAT #selectAllOffres{
+#interfaceAT #selectAllOffres {
     user-select: none;
     cursor: pointer;
 }
 
-#interfaceAT .offre{
+#interfaceAT .offre {
     cursor: pointer;
     display: flex;
     align-items: center;
-    padding: 0.3vh 0.5vw;
+    padding: 0.3vh 0.1vw;
 }
 
-#interfaceAT .offre input{
-    margin-right: 0.5vw;
+#interfaceAT .offre input {
+    margin-right: 2vw;
 }
 
-#interfaceAT .offre:hover{
-    background-color: var(--color-bleu-clair);
+#interfaceAT .offre:hover {
+    background-color: #01b5fc;
     color: white;
 }
 
-#interfaceAT .offre.checked:not(:hover){
-    background-color: var(--color-bleu-fonce);
+#interfaceAT .offre.checked:not(:hover) {
+    background-color: #0070ca;
     color: white;
 }
 
-#interfaceAT .pointagesOffre{
+#interfaceAT .pointagesOffre {
     display: flex;
     flex-direction: column;
     align-items: center;
     padding: 4vh 2vw;
+
+}
+
+#selectSemaine {
+    width: unset;
 }

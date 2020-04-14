@@ -7,7 +7,6 @@
 
 require 'vendor/autoload.php';
 
-use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
 ##########################################################################################################################################
@@ -17,96 +16,96 @@ use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 echo '<div id="interfaceAT">';
 
 //Si l'offre ou la semaine ne sont pas selectionnés, retour à l'acceuil
-if (!isset($_GET["mode"])) {
+if (!isset($_GET["mode"]))
+{
     header("Location: index.php?action=InterfaceAT");
 }
 
 //Si exportation du CSV d'une offre
-if ($_GET["mode"] == "unique") {
+if ($_GET["mode"] == "unique")
+{
 
-    if (!isset($_GET["idOffre"]) || !isset($_GET["idSemaine"])) {
+    if (!isset($_GET["idOffre"]) || !isset($_GET["idSemaine"]))
+    {
+        header("Location: index.php?action=InterfaceAT");
+    }
+    $idOffre = $_GET["idOffre"];
+    $numOffre = OffreManager::findById($idOffre)->getNumOffre();
+    $numSemaine = SemaineManager::findById($_GET["idSemaine"])->getNumSemaine();
+    $codeFormation = FormationManager::findById(OffreManager::findById($idOffre)->getIdFormation())->getCodeFormation();
+
+    $gabarit = \PhpOffice\PhpSpreadsheet\IOFactory::load("CSV/Gabarit.xlsx");
+    $sheet = $gabarit->getActiveSheet();
+    $nomFichier = "Pointages Offre " . $numOffre . " - Semaine n°" . $numSemaine;
+    saveCSV($nomFichier, $gabarit);
+    $spreadsheet = \PhpOffice\PhpSpreadsheet\IOFactory::load("CSV/" . $nomFichier . ".xlsx");
+    $onglet = $spreadsheet->getActiveSheet();
+    $onglet->setTitle($numOffre . ' - ' . $codeFormation);
+
+    remplirOnglet($_GET["idOffre"], $_GET["idSemaine"], $onglet);
+    saveCSV($nomFichier, $spreadsheet);
+
+//Si exportation du CSV de plusieurs offres
+}
+else if ($_GET["mode"] == "multiple")
+{
+    if (!isset($_POST["idOffres"]) || !isset($_GET["idSemaine"]))
+    {
         header("Location: index.php?action=InterfaceAT");
     }
 
-    $numOffre = OffreManager::findById($_GET["idOffre"])->getNumOffre();
     $numSemaine = SemaineManager::findById($_GET["idSemaine"])->getNumSemaine();
 
-    $spreadsheet = new Spreadsheet();
-    $spreadsheet->removeSheetByIndex(0);
-
-    $onglet = getOngletOffre($_GET["idOffre"], $_GET["idSemaine"]);
-
-    $spreadsheet->addSheet($onglet, 0);
-    $spreadsheet->setActiveSheetIndex(0);
-
-    $spreadsheet->getActiveSheet()->getStyle('A1:Z200')->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
-
-    $colonnes = ['A', 'B', 'C', 'D', 'E', 'F', 'G'];
-    foreach ($colonnes as $colonne) {
-        $spreadsheet->getActiveSheet()->getColumnDimension($colonne)->setWidth(20);
-    }
-
-    $nomFichier = "Pointages Offre " . $numOffre . " - Semaine n°" . $numSemaine;
-
-//Si exportation du CSV de plusieurs offres
-} else if ($_GET["mode"] == "multiple") {
-    if (!isset($_POST["idOffres"]) || !isset($_GET["idSemaine"])) {
-        header("Location: index.php");
-    }
-
-    $numSemaine = SemaineManager::findById($_GET["idSemaine"])->getNumSemaine();
-
-    $spreadsheet = new Spreadsheet();
-    $spreadsheet->removeSheetByIndex(0);
+    $gabarit = \PhpOffice\PhpSpreadsheet\IOFactory::load("CSV/Gabarit.xlsx");
+    $sheet = $gabarit->getActiveSheet();
+    // $nomFichier = "Pointages Offre " . implode(',', $numOffres) . " - Semaine n°" . $numSemaine;
+    $nomFichier = "Pointages Offres ".$_POST['listeOffres']." Semaine n°" . $numSemaine;
+    saveCSV($nomFichier, $gabarit);
+    $spreadsheet = \PhpOffice\PhpSpreadsheet\IOFactory::load("CSV/" . $nomFichier . ".xlsx");
+    $onglet = $spreadsheet->getActiveSheet();
 
     $numOffres = [];
 
-    foreach ($_POST["idOffres"] as $key => $idOffre) {
+    foreach ($_POST["idOffres"] as $key => $idOffre)
+    {
 
         $numOffre = OffreManager::findById($idOffre)->getNumOffre();
+        $codeFormation = FormationManager::findById(OffreManager::findById($idOffre)->getIdFormation())->getCodeFormation();
 
-        if ($spreadsheet->getSheetByName($numOffre . ' - libelle formation') == null) {
-
+        if ($spreadsheet->getSheetByName($numOffre . ' - ' . $codeFormation) == null)
+        {
             $numOffres[] = $numOffre;
+            //on duplique l'onglet
+            $clonedWorksheet = clone $spreadsheet->getSheetByName('1');
+            $clonedWorksheet->setTitle($numOffre . ' - ' . $codeFormation);
+            $spreadsheet->addSheet($clonedWorksheet);
 
-            $onglet = getOngletOffre($idOffre, $_GET["idSemaine"]);
-            $spreadsheet->addSheet($onglet, $key);
+            remplirOnglet($idOffre, $_GET["idSemaine"], $clonedWorksheet);
 
         }
     }
-
-    foreach($spreadsheet->getAllSheets() as $sheet){
-        $sheet->getStyle('A1:Z200')->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
-
-        $colonnes = ['A', 'B', 'C', 'D', 'E', 'F', 'G'];
-        foreach ($colonnes as $colonne) {
-            $sheet->getColumnDimension($colonne)->setWidth(20);
-        }
-    }
-
-    
+    //on enleve le gabarit
+    $spreadsheet->removeSheetByIndex(0);
     $spreadsheet->setActiveSheetIndex(0);
-
-    $nomFichier = "Pointages Offre " . implode(',', $numOffres) . " - Semaine n°" . $numSemaine;
-
 }
 
-saveCSV($nomFichier,$spreadsheet);
+saveCSV($nomFichier, $spreadsheet);
 
 echo '<p>Le fichier "' . $nomFichier . '" a bien été créé.</p>';
-echo '<a class="bouton" href="CSV/' . $nomFichier . '">Ouvrir fichier</a>';
-echo '<a class="bouton" href="index.php?action=InterfaceAT">Retour</a>';
+echo '<div class="centrer"><a class="btna " href="CSV/' . $nomFichier . '">Ouvrir fichier</a></div>';
+echo '<div class="centrer"><a class="btna " href="index.php?action=InterfaceAT">Retour</a></div>';
 
 ##########################################################################################################################################
 #                                                            FONCTIONS                                                                   #
 ##########################################################################################################################################
 
 //Fonction qui sauvegarde le fichier
-function saveCSV($nomFichier,$spreadsheet)
+function saveCSV($nomFichier, $spreadsheet)
 {
 
     //Créer le dossier CSV s'il n'existe pas
-    if (!is_dir("CSV")) {
+    if (!is_dir("CSV"))
+    {
         mkdir("CSV");
     }
 
@@ -115,172 +114,48 @@ function saveCSV($nomFichier,$spreadsheet)
 
 }
 
-//Fonction qui retourne une liste triée des pointages d'un offre
-function getPointagesOffreSemaine($idOffre, $idSemaine)
-{
 
-    #############################################################
-    #                RECUPERATION DES DONNEES                   #
-    #############################################################
-
-    //Récupérer et afficher la liste des pointages correspondants à l'offre et à la semaine
-    $pointages = [];
-
-    //Stagiaires de l'offre
-    $stagiaires = StagiaireManager::getStagiairesParOffres($idOffre);
-
-    $pointagesStagiaire = []; //Pointages d'un stagiaire dans la semaine
-    $pointagesStagiaires = []; //Listes des pointages de tout les stagiaires dans la semaine
-
-    //Pour chaque stagiaire de l'offre
-    foreach ($stagiaires as $stagiaire) {
-
-        //Recuperer les pointages de la semaine
-        $pointagesStagiaire = PointageManager::getListValidesByStagiaire($stagiaire->getIdStagiaire(), $idSemaine);
-
-        //Ajouter les pointages du stagiaire à la liste de pointage tout les stagiaires
-        $pointagesStagiaires[$stagiaire->getIdStagiaire()] = $pointagesStagiaire;
-    }
-
-    //Nb total de pointages
-    $nbPointages = 0;
-
-    //Compte le nb total de pointages en ajoutant le nombre de pointages de chaque stagiaire
-    foreach ($pointagesStagiaires as $pointagesStagiaire) {
-        $nbPointages += count($pointagesStagiaire);
-    }
-
-    #############################################################
-    #    TRI DES DONNEES PAR STAGIAIRE, JOUR, DEMI-JOURNÉE      #
-    #############################################################
-
-    //Pour chaque stagiaire
-    foreach ($stagiaires as $stagiaire) {
-        //Récupérer la liste de ses pointages dans la semaine
-        $pointagesStagiaire = $pointagesStagiaires[$stagiaire->getIdStagiaire()];
-
-        //Liste des jours de la semaine
-        $jours = JourneeManager::getListBySemaine($idSemaine);
-
-        //Libellé des jours
-        $libelleJours = ["LUNDI", "MARDI", "MERCREDI", "JEUDI", "VENDREDI"];
-
-        //Jours associés à leur libellé
-        // Ex: ["LUNDI" => 2020-04-07,"MARDI" => 2020-04-08, ......... ]
-        $joursSemaine = [];
-
-        $indexSemaine = 0;
-
-        foreach ($jours as $key => $jour) {
-
-            if ($key > 0) {
-                if ($jour->getJour() != $jours[$key - 1]->getJour()) {
-                    $indexSemaine++;
-                }
-            }
-
-            $joursSemaine[$libelleJours[$indexSemaine]] = $jour->getJour();
-
-        }
-
-        $pointagesJours = [];
-
-        //Remplissage de $pointagesJours
-        // Ex:  ["LUNDI"=>["matin"=>$pointage1,"apres-midi"=>$pointage2],"MARDI"=>["matin"=>$pointage3,"apres-midi"=>$pointage4] ....... ]
-
-        foreach ($pointagesStagiaire as $pointage) {
-
-            //Jour du pointage
-            $jour = JourneeManager::findById($pointage->getIdJournee());
-
-            //Remplissage de $pointagesJours
-            foreach ($libelleJours as $libelle) {
-                if ($joursSemaine[$libelle] == $jour->getJour()) {
-                    if ($jour->getDemiJournee() == "matin") {
-                        $pointagesJours[$libelle]["matin"] = $pointage;
-                    } else if ($jour->getDemiJournee() == "après-midi") {
-                        $pointagesJours[$libelle]["après-midi"] = $pointage;
-                    }
-                }
-            }
-        }
-
-        $pointages[] = [
-            "numBenef" => $stagiaire->getNumBenef(),
-            "pointages" => $pointagesJours,
-        ];
-    }
-
-    return $pointages;
-}
-
-//Fonction qui retourne un onglet pour les pointages d'une offre
-function getOngletOffre($idOffre, $idSemaine)
+function remplirOnglet($idOffre, $idSemaine, $onglet)
 {
 
     //Pointages de tous les stagiaires dans la semaine
-    $pointagesStagiaires = getPointagesOffreSemaine($idOffre, $idSemaine);
+    $stagiaires = StagiaireManager::getStagiairesParOffres($idOffre);
 
     $numOffre = OffreManager::findById($idOffre)->getNumOffre();
     $numSemaine = SemaineManager::findById($idSemaine)->getNumSemaine();
-
-    //Créer un nouvel onglet
-    $onglet = new \PhpOffice\PhpSpreadsheet\Worksheet\Worksheet(null, $numOffre . ' - libelle formation');
+    $codeFormation = FormationManager::findById(OffreManager::findById($idOffre)->getIdFormation())->getCodeFormation();
+    $lesJours = JourneeManager::getListBySemaine($idSemaine);
 
     //Cellule de titre
-    $onglet->setCellValue('A1', 'Pointages des bénéficiaires de l\'offre ' . $numOffre . ' pendant la semaine n°' . $numSemaine);
-    $onglet->mergeCells('A1:G1');
+    $onglet->setCellValue('A1', 'Pointages des bénéficiaires de l\'offre ' . $numOffre . ' - ' . $codeFormation . ' pendant la semaine n°' . $numSemaine);
 
     //En-tête du tableau
+     $i = 0;
+    foreach ($stagiaires as $stagiaire)
+    {
+   
+        $colonne = 0;
+        $pointagesStagiaire = PointageManager::getListValidesByStagiaire($stagiaire->getIdStagiaire(), $idSemaine);
+        $identifStagiaire = StagiaireManager::findById($pointagesStagiaire[0]->getIdStagiaire());
+        $beneficiaire = $identifStagiaire->getNumBenef() . ' - ' . $identifStagiaire->getNom() . ' ' . $identifStagiaire->getPrenom();
+        $onglet->setCellValueByColumnAndRow(1, 4 + $i, $beneficiaire);
+        foreach ($pointagesStagiaire as $pointage)
+        {
+            if ($pointage->getIdJournee() == $lesJours[$colonne]->getIdJournee())
+            {
+                //Récupération de l'indicateur de présence grace à son id dans pointage
+                $presence = PresenceManager::findById($pointage->getIdPresence());
 
-    $jours = ['LUNDI', 'MARDI', 'MERCREDI', 'JEUDI', 'VENDREDI'];
+                $refPresence = $presence->getRefPresence();
 
-    $entetes = array_merge(['N°Bénéficiaire'], $jours);
+                //Afficher le code de présence
+                $onglet->setCellValueByColumnAndRow($colonne + 2,$i+4,  $refPresence);
 
-    foreach ($entetes as $key => $entete) {
-        $onglet->setCellValueByColumnAndRow($key + 1, 3, $entete);
-    }
-
-    foreach ($pointagesStagiaires as $key => $pointagesStagiaire) {
-
-        $onglet->setCellValueByColumnAndRow(1, 4 + ($key * 2), $pointagesStagiaire["numBenef"]);
-        $onglet->mergeCellsByColumnAndRow(1, 4 + ($key * 2), 1, 4 + ($key * 2) + 1);
-
-        $pointagesJours = $pointagesStagiaire["pointages"];
-
-        foreach ($jours as $keyJour => $libelle) {
-
-            //Si un pointage correspond à ce jour
-            if (isset($pointagesJours[$libelle])) {
-
-                //Si une information de pointage existe pour le matin
-                if (isset($pointagesJours[$libelle]["matin"])) {
-
-                    //Récupération de l'indicateur de présence grace à son id dans pointage
-                    $presence = PresenceManager::findById($pointagesJours[$libelle]["matin"]->getIdPresence());
-
-                    $refPresence = $presence->getRefPresence();
-                    $libellePresence = $presence->getLibellePresence();
-
-                    //Afficher le code de présence
-                    $onglet->setCellValueByColumnAndRow($keyJour + 2, 4 + ($key * 2), $refPresence);
-                }
-
-                //Si une information de pointage existe pour l'après-midi
-                if (isset($pointagesJours[$libelle]["après-midi"])) {
-
-                    //Récupération de l'indicateur de présence grace à son id dans pointage
-                    $presence = PresenceManager::findById($pointagesJours[$libelle]["après-midi"]->getIdPresence());
-
-                    $refPresence = $presence->getRefPresence();
-                    $libellePresence = $presence->getLibellePresence();
-
-                    //Afficher le code de présence
-                    $onglet->setCellValueByColumnAndRow($keyJour + 2, 4 + ($key * 2) + 1, $refPresence);
-                }
             }
+            $colonne++;
         }
-
+        
+        $i++;
     }
 
     return $onglet;
