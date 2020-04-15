@@ -137,7 +137,6 @@ if (isset($_POST["numOffre"]))
         $indexStagiaire = 0;
         while ($indexStagiaire < count($stagiaires) && !$trouvePointage)
         {
-            echo "trouvePointage : ".$trouvePointage . "  index : ".$indexStagiaire;
             //Recuperer les pointages de la semaine
             $pointagesStagiaire = PointageManager::getListValidesByStagiaire($stagiaires[$indexStagiaire]->getIdStagiaire(), $idSemaine);
             if (count($pointagesStagiaire) > 0)

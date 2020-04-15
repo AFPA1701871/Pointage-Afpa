@@ -96,7 +96,7 @@ function selectToInput(select,$tagJournee) {
     var parent = select.parentNode; // la div parent
     select.style.display = "none"; // on cache le select
     //on crée un input visible avec la refPresence et un autre caché avec l'id
-    parent.innerHTML += '<input readonly id="input' + select.id + '" name="' + idSelect + '  " value="' + value + '" '+$tagJournee+'  >'; // et on insère un input à la place
+    parent.innerHTML += '<input readonly id="input' + select.id + '" name="' + select.id  + '  " value="' + value + '" '+$tagJournee+'  >'; // et on insère un input à la place
     parent.innerHTML += '<input type="hidden" id="in' + select.id + '" name="in' + select.id + '" value="' + select.options[select.selectedIndex].value + '" '+$tagJournee+'  >'; // et on insère un input à la place
 }
 
