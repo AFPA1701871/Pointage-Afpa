@@ -1,11 +1,11 @@
 <?php
-
+//on recupere l'offre ,la semaine et les informations stagiaire
 $idOffre = $_SESSION['idOffre'];
 $semaineEnCours = JourneeManager::getSemaineEnCours();
-
 $lesJours = JourneeManager::getListBySemaine($semaineEnCours->getIdSemaine());
 $idStagiaire = $_SESSION['idStagiaire'];
 $stagiaire = StagiaireManager::findById($idStagiaire);
+//on crée la page
 ?>
 
 <div id="tableau">
@@ -20,31 +20,37 @@ echo '<input id="idSemaine" name="idSemaine" value = "'.$semaineEnCours->getIdSe
 $pointage = PointageManager::getListByStagiaire($idStagiaire, $semaineEnCours->getIdSemaine());
 $longueur = count($pointage);
 echo '<div class="bloc colonne">';
-//<div class="row">';
-
 $compteur = 0;
 $indexPointage = 0;
+//pour chaque case de pointage
 for ($i = 0; $i < 10; $i++)
 {
+    //s'il reste du pointage (en base de données)
     if ($indexPointage < $longueur)
     {
+        //si le pointage correspond à la demi-journée traitée
         if ($pointage[$indexPointage]->getIdJournee() == $lesJours[$i]->getIdJournee())
         {
+            //on cache l'id pointage, qui permettra de faire la difference entre add et update
             $inputIdpointage = '<input id="idPointage'.$i.'" name="idPointage'.$i.'" value = "'.$pointage[$indexPointage]->getIdPointage().'" type="hidden">';
             $presence = PresenceManager::findById($pointage[$indexPointage]->getIdPresence());
+            //si le pointage est validé
             if ($pointage[$indexPointage]->getValidation() == 1)
             {
+                //on crée une combo
                 $affichage = '<input readonly id="combo'.$i.'" name="combo'.$i.'" type="text" value="' . $presence->getRefPresence() . '">';
                 $commente = '<input readonly id="commentaire'.$i.'" name="commentaire'.$i.'" type="text" >' . $pointage[$indexPointage]->getCommentaire() . '</textarea>';
             }
             else
             {
+                //on crée un input
                 $affichage = optionComboBox($pointage[$indexPointage]->getIdPresence(), 1,"combo".$i,"","");
                 $commente = '<textarea class="commente" id="commentaire'.$i.'" name="commentaire'.$i.'" >'.$pointage[$indexPointage]->getCommentaire().'</textarea>';
             }
         }
         else
         {
+            //pas de pointage en base, on met un idpointage null et une combo sans selection
             $inputIdpointage = '<input id="idPointage'.$i.'" name="idPointage'.$i.'" value = "null" type="hidden">';
             $indexPointage--;
             $affichage = optionComboBox(null, 1,"combo".$i,"","");
@@ -53,12 +59,13 @@ for ($i = 0; $i < 10; $i++)
     }
     else
     {
+        //pas de pointage en base, on met un idpointage null et une combo sans selection
         $inputIdpointage = '<input id="idPointage'.$i.'" name="idPointage'.$i.'" value = "null" type="hidden">';
         $affichage = optionComboBox(null, 1,"combo".$i,"","");
         $commente = '<textarea class="commente" id="commentaire'.$i.'" name="commentaire'.$i.'"  placeholder="commentaire éventuel"></textarea>';
     }
     $compteur++;
-
+    //en fonction de la case pointage, on prepare le titre
     switch ($i)
     {
         case 0:
@@ -88,7 +95,7 @@ for ($i = 0; $i < 10; $i++)
     }
     if ($i < 9)
     { //Tous les jours 
-
+        //on injecte les inputs créés dans la dom
         echo '<div class="colonne">'.$inputIdpointage.'
             <input type ="hidden" id="idJournee'.$i.'" name="idJournee'.$i.'" value="'.$lesJours[$i]->getIdJournee().'">
             <div class="case">
@@ -108,20 +115,14 @@ for ($i = 0; $i < 10; $i++)
                 </div></div>';
 
     }
-    // if ($compteur == 2 && $i < 9)
-    // {
-    //     $compteur = 0;
-    //     echo '</div><div class="row">';
-    // }
-
     $indexPointage++;
-
 }
-echo '</div></div>';
-echo '</div>
-    <div class="colonne centre">
-        <input class="btna" type="submit" value="Enregistrer">';
+echo '              </div>
+                </div>
+            </div>
+            <div class="colonne centre">
+                <input class="btna" type="submit" value="Enregistrer">';
 
-echo '</div>
+echo '      </div>
         </form>
-            </div>';
+    </div>';

@@ -1,4 +1,7 @@
 <?php
+//après la connection d'un formateur, cette page est appelée.
+//si le formateur n'a qu'une offre, il est redirigé directement vers InterfaceFormateur
+//sinon, il sélectionne l'offre qu'il veut traiter
 if (isset($_SESSION['matricule'])) {
     $liste = OffreManager::getListByFormateur($_SESSION['idFormateur']); // on va chercher les offres du formateur
     if (count($liste) == 1) { // si il n'y a qu'une offre

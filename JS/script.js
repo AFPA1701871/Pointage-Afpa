@@ -1,3 +1,6 @@
+/***********************************************/
+/* Gestion de l'oeil sur la page de connexion  */
+/***********************************************/
 oeil=document.getElementById("oeil");
 
 oeil.addEventListener("mousedown",montrerMDP);
@@ -12,6 +15,10 @@ function montrerMDP(){
         document.getElementById('motDePasse').type='text';
     }  
 }
+
+/****************************************************/
+/* Gestion du placeHolder dans la page de connexion */
+/****************************************************/
 // on va chercher les elements "choix" 
 choix=document.getElementById("choix"); 
 choix.addEventListener("change",select); // action de changer la selection 
