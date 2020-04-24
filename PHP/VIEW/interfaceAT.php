@@ -2,7 +2,8 @@
 <div id="interfaceAT">
 
 <?php
-// le formulaire présente la partie de sélection tout le temps et la partie de résultats seulement si le 1er formulaire a été rempli.
+// le formulaire présente la partie de sélection tout le temps 
+// et la partie de résultats seulement si le 1er formulaire a été rempli.
 // la 2eme partie contient des boutons qui redirige vers ExportCSV
 
 

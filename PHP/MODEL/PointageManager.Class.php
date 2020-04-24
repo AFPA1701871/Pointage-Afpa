@@ -63,11 +63,11 @@ class PointageManager
         }
         return $tableau;
     }
-    public static function getListByStagiaire($idStagiaire,$idSemaine)
+    public static function getListByStagiaire($idStagiaire, $idSemaine)
     {
         $db = DbConnect::getDb();
         $tableau = [];
-        $q = $db->prepare("SELECT * FROM pointage as p , journee as j where p.idJournee=j.idJournee and idStagiaire =".$idStagiaire." and j.idSemaine  = ".$idSemaine. " order by p.idJournee");
+        $q = $db->prepare("SELECT * FROM pointage as p , journee as j where p.idJournee=j.idJournee and idStagiaire =" . $idStagiaire . " and j.idSemaine  = " . $idSemaine . " order by p.idJournee");
         $q->execute();
         while ($donnees = $q->fetch(PDO::FETCH_ASSOC))
         {
@@ -78,11 +78,11 @@ class PointageManager
         }
         return $tableau;
     }
-    public static function getListvalidesByStagiaire($idStagiaire,$idSemaine)
+    public static function getListvalidesByStagiaire($idStagiaire, $idSemaine)
     {
         $db = DbConnect::getDb();
         $tableau = [];
-        $q = $db->prepare("SELECT * FROM pointage as p , journee as j where p.idJournee=j.idJournee and idStagiaire =".$idStagiaire." and j.idSemaine  = ".$idSemaine. " and validation =1 order by p.idJournee");
+        $q = $db->prepare("SELECT * FROM pointage as p , journee as j where p.idJournee=j.idJournee and idStagiaire =" . $idStagiaire . " and j.idSemaine  = " . $idSemaine . " and validation =1 order by p.idJournee");
         $q->execute();
         while ($donnees = $q->fetch(PDO::FETCH_ASSOC))
         {
@@ -109,13 +109,22 @@ class PointageManager
         $index = 0;
         foreach ($lesJours as $uneJournee)
         {
-            $q = $db->prepare("REPLACE INTO pointage (idPointage, idStagiaire, idJournee, idPresence, commentaire, validation) VALUES (:idPointage, :idStagiaire, :idJournee, :idPresence, :commentaire, :validation)");
-            $q->bindValue(":idStagiaire", $idStagiaire);
-            $q->bindValue(":idJournee", $uneJournee->getIdJournee());
-            $q->bindValue(":idPointage", $tabPointage[$index]->getidPointage());
-            $q->bindValue(":idPresence", $tabPointage[$index]->getidPresence());
-            $q->bindValue(":commentaire", $tabPointage[$index]->getCommentaire());
-            $q->bindValue(":validation", $tabPointage[$index]->getValidation());
+            if ($tabPointage[$index]->getidPointage() == null)
+            {
+                $q = $db->prepare("INSERT INTO pointage ( idStagiaire, idJournee, idPresence, commentaire, validation) VALUES ( :idStagiaire, :idJournee, :idPresence, :commentaire, :validation)");
+                $q->bindValue(":idStagiaire", $idStagiaire);
+                $q->bindValue(":idJournee", $uneJournee->getIdJournee());
+                $q->bindValue(":idPresence", $tabPointage[$index]->getidPresence());
+                $q->bindValue(":commentaire", $tabPointage[$index]->getCommentaire());
+                $q->bindValue(":validation", $tabPointage[$index]->getValidation());}
+            else
+            {
+                $q = $db->prepare("UPDATE pointage  SET   idPresence=:idPresence , commentaire= :commentaire, validation= :validation WHERE idPointage = :idPointage");
+                $q->bindValue(":idPointage", $tabPointage[$index]->getidPointage());
+                $q->bindValue(":idPresence", $tabPointage[$index]->getidPresence());
+                $q->bindValue(":commentaire", $tabPointage[$index]->getCommentaire());
+                $q->bindValue(":validation", $tabPointage[$index]->getValidation());
+            }
             $q->execute();
             $index++;
         }
