@@ -7,6 +7,7 @@ $matricule = (isset($_SESSION['matricule'])) ? $_SESSION['matricule'] : '';
 $nom2 = (isset($_SESSION['nom'])) ? $_SESSION['nom'] : '';
 $prenom = (isset($_SESSION['prenom'])) ? $_SESSION['prenom'] : '';
 $action = (isset($_GET['action'])) ? $_GET['action'] : '';
+
 ?>
 
 <body>
@@ -21,7 +22,7 @@ $action = (isset($_GET['action'])) ? $_GET['action'] : '';
         <div class="colonne centrer" id="bienvenue">
 
             <?php
-if ($action != "connexion")
+if ($action != "connexion" && $action != "")
 {
     if ($identifiant != "" || $matricule != "")
     {

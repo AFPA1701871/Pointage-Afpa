@@ -1,4 +1,12 @@
 /***********************************************/
+/* Gestion du timeout                          */
+/***********************************************/
+setTimeout(() => {
+    alert("Vous avez été déconnecté"); 
+    location.replace("index.php?action=deconnexion");
+},1000*60*15);
+
+/***********************************************/
 /* Gestion de l'oeil sur la page de connexion  */
 /***********************************************/
 oeil=document.getElementById("oeil");
