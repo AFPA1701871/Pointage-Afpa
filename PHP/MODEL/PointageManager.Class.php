@@ -47,6 +47,21 @@ class PointageManager
             return false;
         }
     }
+    public static function findByStagiairejournee($idStagiaire, $idJournee)
+    {
+        $db = DbConnect::getDb();
+        $q = $db->prepare("SELECT * FROM pointage WHERE IdStagiaire=" . $idStagiaire . " and idJournee = " . $idJournee);
+        $q->execute();
+        $results = $q->fetch(PDO::FETCH_ASSOC);
+        if ($results != false)
+        {
+            return new Pointage($results);
+        }
+        else
+        {
+            return false;
+        }
+    }
 
     public static function getList()
     {
@@ -109,7 +124,10 @@ class PointageManager
         $index = 0;
         foreach ($lesJours as $uneJournee)
         {
-            if ($tabPointage[$index]->getidPointage() == null)
+            //pour eviter les doublons de transmissions
+            //on regarde si le pointage existe déjà
+            $present = self::findByStagiairejournee($idStagiaire, $uneJournee->getIdJournee());
+            if ($present == null)
             {
                 $q = $db->prepare("INSERT INTO pointage ( idStagiaire, idJournee, idPresence, commentaire, validation) VALUES ( :idStagiaire, :idJournee, :idPresence, :commentaire, :validation)");
                 $q->bindValue(":idStagiaire", $idStagiaire);
@@ -118,7 +136,12 @@ class PointageManager
                 $q->bindValue(":commentaire", $tabPointage[$index]->getCommentaire());
                 $q->bindValue(":validation", $tabPointage[$index]->getValidation());}
             else
-            {
+            { //le pointage existe deja
+                //on regarde si l'idPointage était présent dans le formulaire
+                if ($tabPointage[$index]->getidPointage() == null)
+                { //on est sans doute dans le cas qui genere les doublons
+                    $tabPointage[$index]->setidPointage($present->getIdPointage());
+                }
                 $q = $db->prepare("UPDATE pointage  SET   idPresence=:idPresence , commentaire= :commentaire, validation= :validation WHERE idPointage = :idPointage");
                 $q->bindValue(":idPointage", $tabPointage[$index]->getidPointage());
                 $q->bindValue(":idPresence", $tabPointage[$index]->getidPresence());
